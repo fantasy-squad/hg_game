@@ -95,7 +95,7 @@ function ContestCard({ d }) {
     useEffect(() => {
         API.Socket((s) => {
             s.on("new-user-joined", (data) => {
-                toast.success(`new user joined ${data.contest_id} ${d?.id} `)
+                // toast.success(`new user joined ${data.contest_id} ${d?.id} `)
                 if (data.contest_id == d?.id) {
                     setJoined(p => p + 1);
                 }
