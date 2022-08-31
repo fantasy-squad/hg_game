@@ -184,15 +184,15 @@ body {
 	justify-content: space-between;
 	padding: 21px 15px 15px;
 }
-.user::before {
-	position: absolute;
-	content: "";
-	width: 24%;
-	height: 1px;
-	background: #dbdbdb;
-	left: 38%;
-	top: 299px;
-}
+// .user::before {
+// 	position: absolute;
+// 	content: "";
+// 	width: 24%;
+// 	height: 1px;
+// 	background: #dbdbdb;
+// 	left: 38%;
+// 	top: 299px;
+// }
 .user-id h6 {
 	display: inline-block;
 	vertical-align: unset;
