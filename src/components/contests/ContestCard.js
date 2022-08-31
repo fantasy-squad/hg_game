@@ -117,7 +117,7 @@ function ContestCard({ d }) {
             "m": minutes,
             "s": seconds
         };
-        return `${hours}h:${minutes}m:${seconds}s`;
+        return `Starting in ${hours}h:${minutes}m:${seconds}s`;
     }
 
 
@@ -170,7 +170,7 @@ function ContestCard({ d }) {
                                 }
                             </h5>
                         </div>
-                        <p>
+                        <p className='ccrd-time' >
                             {secondsToTime(seconds)}
                         </p>
                         <div className="free">
@@ -181,12 +181,18 @@ function ContestCard({ d }) {
                     </div>
                     <div className="user">
                         <div className="pp">
-                            <h5>1P</h5>
+                            <h5>{d?.group_teams}P</h5>
                         </div>
                         <div className="user-id">
+
                             <div className="awad">
                                 <img src="/img/user.png" width={20} />
                                 <h6> {joined > 0 ? joined : d?.total_teams} </h6>
+                            </div>
+
+                            <div className="awad">
+                                <img src="/img/winning.jpeg" width={15} />
+                                <h6> ₹ {d?.prize} </h6>
                             </div>
                             <div className="awad">
                                 <img src="/img/award.png" alt="#" />
