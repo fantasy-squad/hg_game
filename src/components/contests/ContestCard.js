@@ -189,7 +189,7 @@ function ContestCard({ d }) {
 
                                 <div className='ccrd-bonus' >
                                     <img src='/img/bonus.jpeg' />
-                                    <h6> {parseInt(d?.bonus)}% Bonus allowed </h6>
+                                    <h6> {`${parseInt(d?.bonus)}% Bonus`} </h6>
                                 </div>
                                 : ""
                         }

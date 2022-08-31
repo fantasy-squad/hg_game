@@ -200,17 +200,20 @@ body {
 }
 .pp h5 {
 	margin: 0;
-	font-size: 16px;
+	font-size: 14px;
 	border: 1px solid #dbdbdb;
 	border-radius: 2px;
-	padding: 3px 12px;
+	padding: 3px 5px;
 }
 .awad h6 {
 	display: inline-block;
 	font-size: 16px;
 }
 .awad {
-	margin-left: 15px;
+	margin-left: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .user-id {
@@ -573,6 +576,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	flex: 1 !important;
 	img {
 		margin-right: 4px;
 	}
