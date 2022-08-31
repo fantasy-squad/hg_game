@@ -113,7 +113,7 @@ function ScoreCard() {
                 <div class="knifee">
                     <img src="/img/back.png" alt="#" class="back" onClick={handleBack} />
                     <img src="https://imgs2.dab3games.com/knife-ninja-video.jpg" alt="#" class="kniffff" />
-                    <h6>knife hit</h6>
+                    <h6>Knife Ninja</h6>
                 </div>
                 <div class="walett">
                     {/* <img src="/img/wallet.png" alt="#" />
@@ -154,7 +154,7 @@ function ScoreCard() {
                                     <h6>Rank</h6>
                                 </th>
                                 <th>
-                                    <h6>Store</h6>
+                                    <h6>Score</h6>
                                 </th>
                                 <th>
                                     <h6>Prize</h6>
