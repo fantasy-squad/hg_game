@@ -97,7 +97,7 @@ function ContestCard({ d }) {
             s.on("new-user-joined", (data) => {
                 // toast.success(`new user joined ${data.contest_id} ${d?.id} `)
                 if (data.contest_id == d?.id) {
-                    setJoined(p => p + 1);
+                    setJoined(p => d?.total_teams + 1);
                 }
             })
         })
@@ -159,7 +159,7 @@ function ContestCard({ d }) {
                             <h5>Battle</h5>
                         </div>
                         <div className="fee">
-                            <p>#{d?.id}</p>
+                            <p>Entry Fee</p>
                         </div>
                     </div>
                     <div className="heading">
@@ -181,8 +181,18 @@ function ContestCard({ d }) {
                     </div>
                     <div className="user">
                         <div className="pp">
-                            <h5>{d?.group_teams}P</h5>
+                            <h5 style={{ fontSize: "14px" }} >{d?.group_teams}P</h5>
                         </div>
+                        {
+                            parseFloat(d?.bonus || "0") > 0 ?
+
+
+                                <div className='ccrd-bonus' >
+                                    <img src='/img/bonus.jpeg' />
+                                    <h6> {parseInt(d?.bonus)}% Bonus allowed </h6>
+                                </div>
+                                : ""
+                        }
                         <div className="user-id">
 
                             <div className="awad">

@@ -124,18 +124,28 @@ function ScoreCard() {
                 <div class="your-rank">
                     {
                         seconds > 1 ?
-                            <p>Fetching Rank in... {seconds} </p>
-                            : ""
+                            <pre>{"Please Wait \n Fetching Your Rank In..."} {seconds} </pre>
+                            : <> <h5>Your Rank</h5>
+                                <h4>{data?.user?.rank}</h4></>
 
                     }
-                    <h5>Your Rank</h5>
-                    <h4>{data?.user?.rank}</h4>
+
                 </div>
-                <div class="score">
-                    <div class="score-content">
-                        <h5>SCORE: {data?.user?.score}</h5>
-                    </div>
-                </div>
+                {
+                    data?.user?.score ?
+
+                        <div class="score">
+                            <div class="score-content">
+                                <h5>SCORE: {data?.user?.score}</h5>
+                            </div>
+                        </div>
+                        :
+
+                        <div class="loadingio-spinner-spinner-20aj1y9ioww"><div class="ldio-knc5xoxdun">
+                            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                        </div></div>
+                }
+
                 <div class="prize-main">
                     <table class="table-respo">
                         <thead>
