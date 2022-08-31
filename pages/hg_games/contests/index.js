@@ -52,7 +52,7 @@ function Contests() {
             <div className="mobileview">
                 <div className="mobile-header">
                     <i className="fa-solid fa-arrow-left" />
-                    <img src={game?.image || "/img/knif.png"} alt="#" className="knif" />
+                    <img src={game?.image || "https://imgs2.dab3games.com/knife-ninja-video.jpg"} alt="#" className="knif" />
                     <h6 className="mx-auto">{game?.name || "Knife Hit"}</h6>
                     <img src="/img/wallet.png" alt="#" className="wallet" style={{ opacity: 0 }} />
                 </div>

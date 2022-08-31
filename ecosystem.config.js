@@ -4,6 +4,4 @@ module.exports = {
     "script": "npm",
     "args": "start",
   },],
-
-
 };

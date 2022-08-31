@@ -112,7 +112,7 @@ function ScoreCard() {
             <div class="mobile-header mobile-head">
                 <div class="knifee">
                     <img src="/img/back.png" alt="#" class="back" onClick={handleBack} />
-                    <img src="/img/knif.png" alt="#" class="kniffff" />
+                    <img src="https://imgs2.dab3games.com/knife-ninja-video.jpg" alt="#" class="kniffff" />
                     <h6>knife hit</h6>
                 </div>
                 <div class="walett">
