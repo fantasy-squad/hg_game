@@ -16,7 +16,7 @@ function ScoreCard() {
         if (!router.isReady) return;
 
         let tkn = router?.query?.token;
-        let user_id = router?.query?.user_id;
+        let user_id = router?.query?.user_id; 
         let contest_id = router?.query?.contest_id;
         let group_id = router?.query?.group_id;
         let score = router?.query?.score;
