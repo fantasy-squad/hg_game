@@ -97,7 +97,7 @@ function ContestCard({ d }) {
             s.on("new-user-joined", (data) => {
                 // toast.success(`new user joined ${data.contest_id} ${d?.id} `)
                 if (data.contest_id == d?.id) {
-                    setJoined(p => p + 1);
+                    setJoined(p => d?.total_teams + 1);
                 }
             })
         })
@@ -117,7 +117,7 @@ function ContestCard({ d }) {
             "m": minutes,
             "s": seconds
         };
-        return `${hours}h:${minutes}m:${seconds}s`;
+        return `Starting in ${hours}h:${minutes}m:${seconds}s`;
     }
 
 
@@ -159,7 +159,7 @@ function ContestCard({ d }) {
                             <h5>Battle</h5>
                         </div>
                         <div className="fee">
-                            <p>#{d?.id}</p>
+                            <p>Entry Fee</p>
                         </div>
                     </div>
                     <div className="heading">
@@ -170,7 +170,7 @@ function ContestCard({ d }) {
                                 }
                             </h5>
                         </div>
-                        <p>
+                        <p className='ccrd-time' >
                             {secondsToTime(seconds)}
                         </p>
                         <div className="free">
@@ -181,12 +181,28 @@ function ContestCard({ d }) {
                     </div>
                     <div className="user">
                         <div className="pp">
-                            <h5>1P</h5>
+                            <h5 style={{ fontSize: "14px" }} >{d?.group_teams}P</h5>
                         </div>
+                        {
+                            parseFloat(d?.bonus || "0") > 0 ?
+
+
+                                <div className='ccrd-bonus' >
+                                    <img src='/img/bonus.jpeg' />
+                                    <h6> {`${parseInt(d?.bonus)}% Bonus`} </h6>
+                                </div>
+                                : ""
+                        }
                         <div className="user-id">
+
                             <div className="awad">
                                 <img src="/img/user.png" width={20} />
                                 <h6> {joined > 0 ? joined : d?.total_teams} </h6>
+                            </div>
+
+                            <div className="awad">
+                                <img src="/img/winning.jpeg" width={15} />
+                                <h6> ₹ {d?.prize} </h6>
                             </div>
                             <div className="awad">
                                 <img src="/img/award.png" alt="#" />
