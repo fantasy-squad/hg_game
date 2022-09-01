@@ -4,6 +4,7 @@ import { atomWithStorage } from 'jotai/utils'
 export default {
 
     contestList: atom([]),
+    historyList: atom([]),
     myGroup: atom({}),
     myScore: atom({}),
     socket: atom(null),

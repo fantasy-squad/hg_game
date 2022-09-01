@@ -107,6 +107,23 @@ export default {
 			})
 			.catch((err) => console.log(err));
 	},
+	myHistory: ({ params }, cb, token) => {
+		console.log("🚀 ~ file: API.js ~ line 48 ~ contestList", params);
+		// writeAtom(apiAtom.contestList, []);
+		api
+			.get("html_game/history", params, token)
+			.then((d) => {
+				console.log("🚀 ~ file: API.js ~ line 51 ~ .then ~ d", d)
+
+				if (d.status) {
+					writeAtom(apiAtom.historyList, d?.data);
+					return cb(d);
+				} else {
+					return toast.error(d?.message)
+				}
+			})
+			.catch((err) => console.log(err));
+	},
 
 	gameDetail: ({ params, id }, cb, token) => {
 		console.log("🚀 ~ file: API.js ~ line 48 ~ contestList", params)
