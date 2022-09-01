@@ -97,7 +97,7 @@ function Contests() {
                           <tr>
                           <td>
                             <div class="numbering">
-                                <h6>2</h6>
+                                <h6>2   </h6>
                              </div>
                             </td>
                             <td>
