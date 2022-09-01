@@ -124,7 +124,9 @@ function ScoreCard() {
                 <div class="your-rank">
                     {
                         seconds > 1 ?
-                            <pre>{"Please Wait \n Fetching Your Rank In..."} {seconds} </pre>
+                            <pre>
+                                <span className='text-red' >Please Wait</span>
+                                {" \n Fetching Your Rank In..."} {seconds} Seconds </pre>
                             : <> <h5>Your Rank</h5>
                                 <h4>{data?.user?.rank}</h4></>
 
@@ -161,6 +163,7 @@ function ScoreCard() {
                                 </th>
                             </tr>
                         </thead>
+
                         <tbody>
                             {
                                 data?.leaderboard?.length ?
@@ -189,8 +192,53 @@ function ScoreCard() {
 
                             }
 
+                            {
+                                seconds > 1 ? <tr>
+                                    <td>
+                                        <div className='sldgjlj' >
+                                            <lines class="shine l1"></lines>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='sldgjlj' >
+                                            <lines class="shine l2"></lines>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='sldgjlj' >
+                                            <lines class="shine l3"></lines>
+
+                                        </div>
+                                    </td>
+                                </tr> : ""
+                            }
+                            {
+                                seconds > 1 ? <tr>
+                                    <td>
+                                        <div className='sldgjlj' >
+                                            <lines class="shine l1"></lines>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='sldgjlj' >
+                                            <lines class="shine l2"></lines>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='sldgjlj' >
+                                            <lines class="shine l3"></lines>
+
+                                        </div>
+                                    </td>
+                                </tr> : ""
+                            }
 
                         </tbody>
+
                     </table>
                 </div>
                 {
