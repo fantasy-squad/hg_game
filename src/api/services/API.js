@@ -92,7 +92,7 @@ export default {
 
 	contestList: ({ params }, cb, token) => {
 		console.log("🚀 ~ file: API.js ~ line 48 ~ contestList", params);
-		writeAtom(apiAtom.contestList, []);
+		// writeAtom(apiAtom.contestList, []);
 		api
 			.get("html_game/contests", params, token)
 			.then((d) => {

@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import FlipNumbers from 'react-flip-numbers';
 
 function HgGames() {
+
+    const [count, setCount] = useState("0")
+
+    useEffect(() => {
+        setInterval(() => {
+            setCount(p => `${parseInt(p) + 1}`)
+        }, 1000);
+    }, [])
+
     return (
         <div className="mobileview">
             <div className="mobile-header">
@@ -36,7 +46,7 @@ function HgGames() {
                             </div>
                             <div className="user-id">
                                 <i className="fa-solid fa-user" />
-                                <h6>20</h6>
+                                <FlipNumbers height={16} width={16} numberStyle={{ fontWeight: "bold" }} perspective={1000} color="black" background="white" play numbers={count} />
                                 <div className="awad">
                                     <img src="/img/award.png" alt="#" />
                                     <h6>1</h6>

@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
 import apiAtom from '../../jotai/apiAtom';
 import { toast } from 'react-hot-toast';
+import FlipNumbers from 'react-flip-numbers';
 
 function ContestCard({ d }) {
 
@@ -96,6 +97,7 @@ function ContestCard({ d }) {
         API.Socket((s) => {
             s.on("new-user-joined", (data) => {
                 // toast.success(`new user joined ${data.contest_id} ${d?.id} `)
+
                 if (data.contest_id == d?.id) {
                     setJoined(p => d?.total_teams + 1);
                 }
@@ -197,7 +199,9 @@ function ContestCard({ d }) {
 
                             <div className="awad">
                                 <img src="/img/user.png" width={20} />
-                                <h6> {joined > 0 ? joined : d?.total_teams} </h6>
+
+
+                                <FlipNumbers height={16} width={16} numberStyle={{ fontWeight: "bold" }} perspective={1000} color="black" background="white" play numbers={`${joined > 0 ? joined : d?.total_teams}`} />
                             </div>
 
                             <div className="awad">

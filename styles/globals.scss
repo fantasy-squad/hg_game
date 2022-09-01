@@ -45,6 +45,7 @@ body {
 }
 .mobile-header {
 	align-items: center;
+	z-index: 1;
 }
 .mobileview .mobile-header i {
 	font-size: 21px;
@@ -891,6 +892,19 @@ body {
 	display: inline-flex;
 	flex-direction: column;
 	vertical-align: top;
+}
+.count-anim {
+	animation: countAnim 0.5s linear 1;
+}
+
+@keyframes countAnim {
+	from {
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-10px);
+		opacity: 0;
+	}
 }
 
 box {
