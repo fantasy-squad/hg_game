@@ -124,6 +124,10 @@ function Contests() {
                         </tbody>
                     </table>
                 </div>
+                <div className="contest-fab">
+                    <button>Battle</button>
+                    <button>Battle</button>
+                </div>
             </div>
         </>
     )
