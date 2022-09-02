@@ -201,7 +201,7 @@ function ContestCard({ d }) {
                                 <img src="/img/user.png" width={20} />
 
 
-                                <FlipNumbers height={16} width={16} numberStyle={{ fontWeight: "bold" }} perspective={1000} color="black" background="white" play numbers={`${joined > 0 ? joined : d?.total_teams}`} />
+                                <FlipNumbers height={16} width={10} numberStyle={{ fontWeight: "bold", margin: 0 }} perspective={1000} color="black" background="white" play numbers={`${joined > 0 ? joined : d?.total_teams}`} />
                             </div>
 
                             <div className="awad">

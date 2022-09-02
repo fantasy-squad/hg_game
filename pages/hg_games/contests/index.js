@@ -10,6 +10,7 @@ import ContestCard from '../../../src/components/contests/ContestCard';
 import GlobalModal from '../../../src/components/Modal/GloabModal';
 import FindMyGroupModal from '../../../src/components/contests/FindMyGroupModal';
 import HistoryCard from '../../../src/components/contests/HistoryCard';
+import PracticeCard from '../../../src/components/contests/PracticeCard';
 
 
 function Contests() {
@@ -90,6 +91,8 @@ function Contests() {
 
                 <div className="mobile-main">
                     <div className="affiliate-main">
+                        {/* {tab == "battle" ? <PracticeCard /> : <></>} */}
+
                         {
                             tab == "battle" ?
                                 (list.length ?
