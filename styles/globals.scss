@@ -808,8 +808,8 @@ body {
 	width: 100px;
 }
 
-.lines {
-	height: 10px;
+lines {
+	height: 10px !important;
 	margin-top: 10px;
 	width: 200px;
 }
@@ -1103,7 +1103,7 @@ body {
 }
 
 lines {
-	height: 10px;
+	height: 10px !important;
 	margin-top: 10px;
 }
 .l1 {
