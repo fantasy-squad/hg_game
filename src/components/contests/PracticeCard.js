@@ -12,6 +12,8 @@ import FlipNumbers from 'react-flip-numbers';
 function PracticeCard({ d }) {
 
     const router = useRouter()
+    const [game, setGame] = useAtom(apiAtom.gameDetail)
+
 
 
 
@@ -20,8 +22,8 @@ function PracticeCard({ d }) {
         let game_id = router?.query?.game_id;
         let tkn = router?.query?.token;
 
-        if (!game_id || !tkn) return;
-        router.push(`http://game.fantasysquad.in/game/fruit_ninja?user_id=${0}&group_id=${0}&contest_id=${0}&token=${tkn}&game_id=${game_id}&type=practice`);
+        if (!game_id || !tkn || !game?.url) return;
+        router.push(`${game?.url}?user_id=${0}&group_id=${0}&contest_id=${0}&token=${tkn}&game_id=${game_id}&type=practice`);
 
     }
 

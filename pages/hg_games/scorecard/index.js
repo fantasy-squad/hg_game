@@ -9,6 +9,7 @@ function ScoreCard() {
     const router = useRouter();
     const [seconds, setSeconds] = useState(30);
     const [data, setData] = useAtom(apiAtom.myScore)
+    const [game, setGame] = useAtom(apiAtom.gameDetail)
 
 
 
@@ -16,7 +17,7 @@ function ScoreCard() {
         if (!router.isReady) return;
 
         let tkn = router?.query?.token;
-        let user_id = router?.query?.user_id; 
+        let user_id = router?.query?.user_id;
         let contest_id = router?.query?.contest_id;
         let group_id = router?.query?.group_id;
         let score = router?.query?.score;
@@ -112,7 +113,7 @@ function ScoreCard() {
             <div class="mobile-header mobile-head">
                 <div class="knifee">
                     <img src="/img/back.png" alt="#" class="back" onClick={handleBack} />
-                    <img src="https://imgs2.dab3games.com/knife-ninja-video.jpg" alt="#" class="kniffff" />
+                    <img rc={game?.image || "https://imgs2.dab3games.com/knife-ninja-video.jpg"} alt="#" class="kniffff" />
                     <h6>Knife Ninja</h6>
                 </div>
                 <div class="walett">

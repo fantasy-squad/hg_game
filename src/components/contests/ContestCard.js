@@ -12,7 +12,8 @@ import FlipNumbers from 'react-flip-numbers';
 function ContestCard({ d }) {
 
     const router = useRouter();
-    let [joined, setJoined] = useState(0)
+    let [joined, setJoined] = useState(d?.total_teams)
+    const [game, setGame] = useAtom(apiAtom.gameDetail)
 
     const [open, setOpen] = useAtom(apiAtom.modal.findMyGroup)
     const [isComplete, setIsComplete] = useState(false)
@@ -41,7 +42,12 @@ function ContestCard({ d }) {
                     if (d?.has_joined > 0) {
                         API.findMyGroup({ body: { contest_id: d?.id } }, (c) => {
                             setOpen(true);
-                            router.push(`http://game.fantasysquad.in/game/knife_ninja?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}`);
+                            if (!game?.url) {
+                                setOpen(false);
+                                return;
+                            }
+                            // router.push(`http://game.fantasysquad.in/game/knife_ninja?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}`);
+                            router.push(`${game?.url}?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}`);
 
                             // user_id=8a88bce9-9b40-410c-a22d-0d0cb7df170b&group_id=466&contest_id=457&token=8a88bce9-9b40-410c-a22d-0d0cb7df170b|hmW1iDtLXcxL8e1zGxp5XxPaQOed4WTJIYcsT8oJVMKrLgAiQ3&score=540
                         }, tkn, () => {
@@ -99,7 +105,7 @@ function ContestCard({ d }) {
                 // toast.success(`new user joined ${data.contest_id} ${d?.id} `)
 
                 if (data.contest_id == d?.id) {
-                    setJoined(p => d?.total_teams + 1);
+                    setJoined(p => p + 1);
                 }
             })
         })
@@ -187,8 +193,6 @@ function ContestCard({ d }) {
                         </div>
                         {
                             parseFloat(d?.bonus || "0") > 0 ?
-
-
                                 <div className='ccrd-bonus' >
                                     <img src='/img/bonus.jpeg' />
                                     <h6> {`${parseInt(d?.bonus)}% Bonus`} </h6>
