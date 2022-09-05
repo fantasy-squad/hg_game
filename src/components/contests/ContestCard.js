@@ -47,7 +47,7 @@ function ContestCard({ d }) {
                                 return;
                             }
                             // router.push(`http://game.fantasysquad.in/game/knife_ninja?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}`);
-                            router.push(`${game?.url}?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}`);
+                            router.push(`${game?.url}?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}&game_id=${d?.hg_game_id}`);
 
                             // user_id=8a88bce9-9b40-410c-a22d-0d0cb7df170b&group_id=466&contest_id=457&token=8a88bce9-9b40-410c-a22d-0d0cb7df170b|hmW1iDtLXcxL8e1zGxp5XxPaQOed4WTJIYcsT8oJVMKrLgAiQ3&score=540
                         }, tkn, () => {

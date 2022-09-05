@@ -21,10 +21,19 @@ function ScoreCard() {
         let contest_id = router?.query?.contest_id;
         let group_id = router?.query?.group_id;
         let score = router?.query?.score;
+        let game_id = router?.query?.game_id;
 
         API.Socket((s) => {
 
         });
+
+        if (game_id) {
+
+
+            API.gameDetail({ id: game_id }, (d) => {
+
+            }, tkn)
+        }
 
 
 
@@ -113,8 +122,8 @@ function ScoreCard() {
             <div class="mobile-header mobile-head">
                 <div class="knifee">
                     <img src="/img/back.png" alt="#" class="back" onClick={handleBack} />
-                    <img rc={game?.image || "https://imgs2.dab3games.com/knife-ninja-video.jpg"} alt="#" class="kniffff" />
-                    <h6>Knife Ninja</h6>
+                    <img rc={game?.image || ""} alt="#" class="kniffff" />
+                    <h6>{game?.name || ""}</h6>
                 </div>
                 <div class="walett">
                     {/* <img src="/img/wallet.png" alt="#" />
