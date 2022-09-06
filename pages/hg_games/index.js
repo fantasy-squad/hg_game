@@ -15,9 +15,9 @@ function HgGames() {
         <div className="mobileview">
             <div className="mobile-header">
                 <i className="fa-solid fa-arrow-left" />
-                <img src="https://imgs2.dab3games.com/knife-ninja-video.jpg" alt="#" className="knif" />
+                <img src="https://imgs2.dab3games.com/knife-ninja-video.jpg" className="knif" />
                 <h6 className="mx-auto">knif hit</h6>
-                <img src="/img/wallet.png" alt="#" className="wallet" />
+                <img src="/img/wallet.png" className="wallet" />
             </div>
 
             <div className="mobile-main">
@@ -25,7 +25,7 @@ function HgGames() {
                     <div className="affliliate-card">
                         <div className="heading haesding2">
                             <div className="battle">
-                                <img src="/img/battle.png" alt="#" />
+                                <img src="/img/battle.png" />
                                 <h5>Battle</h5>
                             </div>
                             <div className="fee">
@@ -48,7 +48,7 @@ function HgGames() {
                                 <i className="fa-solid fa-user" />
                                 <FlipNumbers height={16} width={16} numberStyle={{ fontWeight: "bold" }} perspective={1000} color="black" background="white" play numbers={count} />
                                 <div className="awad">
-                                    <img src="/img/award.png" alt="#" />
+                                    <img src="/img/award.png" />
                                     <h6>1</h6>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@ function HgGames() {
                     <div className="affliliate-card">
                         <div className="heading haesding2">
                             <div className="battle">
-                                <img src="/img/battle.png" alt="#" />
+                                <img src="/img/battle.png" />
                                 <h5>Battle</h5>
                             </div>
                             <div className="fee">
@@ -80,7 +80,7 @@ function HgGames() {
                                 <i className="fa-solid fa-user" />
                                 <h6>20</h6>
                                 <div className="awad">
-                                    <img src="/img/award.png" alt="#" />
+                                    <img src="/img/award.png" />
                                     <h6>1</h6>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ function HgGames() {
                     <div className="affliliate-card">
                         <div className="heading haesding2">
                             <div className="battle">
-                                <img src="/img/battle.png" alt="#" />
+                                <img src="/img/battle.png" />
                                 <h5>Battle</h5>
                             </div>
                             <div className="fee">
@@ -112,7 +112,7 @@ function HgGames() {
                                 <i className="fa-solid fa-user" />
                                 <h6>20</h6>
                                 <div className="awad">
-                                    <img src="/img/award.png" alt="#" />
+                                    <img src="/img/award.png" />
                                     <h6>1</h6>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@ function HgGames() {
                     <div className="affliliate-card">
                         <div className="heading haesding2">
                             <div className="battle">
-                                <img src="/img/battle.png" alt="#" />
+                                <img src="/img/battle.png" />
                                 <h5>Battle</h5>
                             </div>
                             <div className="fee">
@@ -144,7 +144,7 @@ function HgGames() {
                                 <i className="fa-solid fa-user" />
                                 <h6>20</h6>
                                 <div className="awad">
-                                    <img src="/img/award.png" alt="#" />
+                                    <img src="/img/award.png" />
                                     <h6>1</h6>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@ function HgGames() {
                     <div className="affliliate-card">
                         <div className="heading haesding2">
                             <div className="battle">
-                                <img src="/img/battle.png" alt="#" />
+                                <img src="/img/battle.png" />
                                 <h5>Battle</h5>
                             </div>
                             <div className="fee">
@@ -176,7 +176,7 @@ function HgGames() {
                                 <i className="fa-solid fa-user" />
                                 <h6>20</h6>
                                 <div className="awad">
-                                    <img src="/img/award.png" alt="#" />
+                                    <img src="/img/award.png" />
                                     <h6>1</h6>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@ function HgGames() {
                     <div className="affliliate-card">
                         <div className="heading haesding2">
                             <div className="battle">
-                                <img src="/img/battle.png" alt="#" />
+                                <img src="/img/battle.png" />
                                 <h5>Battle</h5>
                             </div>
                             <div className="fee">
@@ -208,7 +208,7 @@ function HgGames() {
                                 <i className="fa-solid fa-user" />
                                 <h6>20</h6>
                                 <div className="awad">
-                                    <img src="/img/award.png" alt="#" />
+                                    <img src="/img/award.png" />
                                     <h6>1</h6>
                                 </div>
                             </div>

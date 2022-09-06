@@ -163,7 +163,7 @@ function ContestCard({ d }) {
                 <div className="affliliate-card">
                     <div className="heading haesding2">
                         <div className="battle">
-                            <img src="/img/battle.png" alt="#" />
+                            <img src="/img/battle.png" />
                             <h5>Battle</h5>
                         </div>
                         <div className="fee">
@@ -213,7 +213,7 @@ function ContestCard({ d }) {
                                 <h6> ₹ {d?.prize} </h6>
                             </div>
                             <div className="awad">
-                                <img src="/img/award.png" alt="#" />
+                                <img src="/img/award.png" />
                                 <h6>1</h6>
                             </div>
                         </div>

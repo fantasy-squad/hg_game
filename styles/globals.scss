@@ -1078,6 +1078,9 @@ lines {
 	animation-name: placeholderShimmer;
 	animation-timing-function: linear;
 }
+.name-loading {
+	margin-left: 15px;
+}
 .sldgjlj {
 	display: inline-flex;
 	flex-direction: column;
@@ -1085,6 +1088,11 @@ lines {
 }
 .count-anim {
 	animation: countAnim 0.5s linear 1;
+}
+.image-loading {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 
 @keyframes countAnim {
@@ -1105,6 +1113,7 @@ lines {
 lines {
 	height: 10px !important;
 	margin-top: 10px;
+	border-radius: 8px;
 }
 .l1 {
 	width: 100px;

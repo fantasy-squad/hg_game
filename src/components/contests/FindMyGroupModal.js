@@ -19,32 +19,32 @@ function FindMyGroupModal() {
           </div>
           <div className="win">
             <div className="firstwin">
-              <img src="/img/award.png" alt="#" />
+              <img src="/img/award.png" />
               <h6>1st</h6>
             </div>
             <div className="firstwin">
-              <img src="/img/money.png " alt="#" />
+              <img src="/img/money.png " />
               <h6>{group?.contest?.prize}</h6>
             </div>
           </div>
           <div className="logo">
-            <img src="/img/Logo.png" alt="#" />
+            <img src="/img/Logo.png" />
           </div>
           <div className="match">
             <div className="thor">
-              <img src={group?.user?.user?.photo || "/img/thor.png"} alt="#" />
+              <img src={group?.user?.user?.photo || "/img/thor.png"} />
               <h6>{group?.user?.user?.username || "YOU"}</h6>
             </div>
             <div className="vsss">
               <h6>VS</h6>
             </div>
             <div className="thor">
-              <img src={group?.oponents?.length ? (group?.oponents[0]?.user?.photo || "/img/thor.png") : "/img/thor.png"} alt="#" />
+              <img src={group?.oponents?.length ? (group?.oponents[0]?.user?.photo || "/img/thor.png") : "/img/thor.png"} />
               <h6>{group?.oponents?.length ? group?.oponents[0]?.user?.username : "OPPONENT"}</h6>
             </div>
           </div>
           <div className="verifey">
-            <img src="/img/v.png" alt="#" />
+            <img src="/img/v.png" />
             <h6>Verified</h6>
           </div>
         </div>

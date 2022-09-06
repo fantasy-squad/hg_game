@@ -121,13 +121,33 @@ function ScoreCard() {
         <div class="mobileview">
             <div class="mobile-header mobile-head">
                 <div class="knifee">
-                    <img src="/img/back.png" alt="#" class="back" onClick={handleBack} />
-                    <img rc={game?.image || ""} alt="#" class="kniffff" />
-                    <h6>{game?.name || ""}</h6>
+                    <img src="/img/back.png" class="back" onClick={handleBack} />
+                    {
+                        game?.image
+                            ?
+
+                            <img src={game?.image || ""} class="kniffff" />
+                            :
+
+                            <div className='shine image-loading'  ></div>
+
+                    }
+                    {
+                        game?.name
+                            ?
+
+                            <h6 className="mx-auto">{game?.name || ""}</h6>
+                            :
+
+                            <lines class="shine name-loading"></lines>
+
+
+                    }
+
                 </div>
                 <div class="walett">
-                    {/* <img src="/img/wallet.png" alt="#" />
-                    <img src="/img/feather-info.png" alt="#" class="info" /> */}
+                    {/* <img src="/img/wallet.png"  />
+                    <img src="/img/feather-info.png"  class="info" /> */}
                 </div>
             </div>
             <div class="rank">

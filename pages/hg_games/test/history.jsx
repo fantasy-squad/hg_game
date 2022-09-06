@@ -23,9 +23,9 @@ function Contests() {
             <div className="mobileview">
                 <div className="mobile-header">
                     <img src="/img/back-button.svg" alt="" className='back' />
-                    <img src="/img/knif.png" alt="#" className="knif" />
+                    <img src="/img/knif.png" className="knif" />
                     <h6 className="mx-auto">Knife Hit</h6>
-                    <img src="/img/wallet.png" alt="#" className="wallet" />
+                    <img src="/img/wallet.png" className="wallet" />
                 </div>
                 <HistoryCard />
                 <HistoryCard />

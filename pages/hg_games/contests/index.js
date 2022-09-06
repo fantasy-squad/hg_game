@@ -84,14 +84,32 @@ function Contests() {
             <div className="mobileview">
                 <div className="mobile-header">
                     <i className="fa-solid fa-arrow-left" />
-                    <img src={game?.image || ""} alt="#" className="knif" />
-                    <h6 className="mx-auto">{game?.name || ""}</h6>
-                    <img src="/img/wallet.png" alt="#" className="wallet" style={{ opacity: 0 }} />
+                    {
+                        game?.image
+                            ?
+                            <img src={game?.image || ""} className="knif" />
+                            :
+
+                            <div className='shine image-loading'  ></div>
+
+                    }
+                    {
+                        game?.name
+                            ?
+
+                            <h6 className="mx-auto">{game?.name || ""}</h6>
+                            :
+
+                            <lines class="shine name-loading"></lines>
+
+
+                    }
+                    <img src="/img/wallet.png" className="wallet" style={{ opacity: 0 }} />
                 </div>
 
                 <div className="mobile-main">
                     <div className="affiliate-main">
-                        {/* {tab == "battle" ? <PracticeCard /> : <></>} */}
+                        {tab == "battle" ? <PracticeCard /> : <></>}
 
                         {
                             tab == "battle" ?
