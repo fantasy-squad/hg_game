@@ -9,6 +9,7 @@ function ScoreCard() {
     const router = useRouter();
     const [seconds, setSeconds] = useState(30);
     const [data, setData] = useAtom(apiAtom.myScore)
+    const [game, setGame] = useAtom(apiAtom.gameDetail)
 
 
 
@@ -16,14 +17,23 @@ function ScoreCard() {
         if (!router.isReady) return;
 
         let tkn = router?.query?.token;
-        let user_id = router?.query?.user_id; 
+        let user_id = router?.query?.user_id;
         let contest_id = router?.query?.contest_id;
         let group_id = router?.query?.group_id;
         let score = router?.query?.score;
+        let game_id = router?.query?.game_id;
 
         API.Socket((s) => {
 
         });
+
+        if (game_id) {
+
+
+            API.gameDetail({ id: game_id }, (d) => {
+
+            }, tkn)
+        }
 
 
 
@@ -111,13 +121,33 @@ function ScoreCard() {
         <div class="mobileview">
             <div class="mobile-header mobile-head">
                 <div class="knifee">
-                    <img src="/img/back.png" alt="#" class="back" onClick={handleBack} />
-                    <img src="https://imgs2.dab3games.com/knife-ninja-video.jpg" alt="#" class="kniffff" />
-                    <h6>Knife Ninja</h6>
+                    <img src="/img/back.png" class="back" onClick={handleBack} />
+                    {
+                        game?.image
+                            ?
+
+                            <img src={game?.image || ""} class="kniffff" />
+                            :
+
+                            <div className='shine image-loading'  ></div>
+
+                    }
+                    {
+                        game?.name
+                            ?
+
+                            <h6 className="mx-auto">{game?.name || ""}</h6>
+                            :
+
+                            <lines class="shine name-loading"></lines>
+
+
+                    }
+
                 </div>
                 <div class="walett">
-                    {/* <img src="/img/wallet.png" alt="#" />
-                    <img src="/img/feather-info.png" alt="#" class="info" /> */}
+                    {/* <img src="/img/wallet.png"  />
+                    <img src="/img/feather-info.png"  class="info" /> */}
                 </div>
             </div>
             <div class="rank">

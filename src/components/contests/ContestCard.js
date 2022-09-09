@@ -7,11 +7,13 @@ import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
 import apiAtom from '../../jotai/apiAtom';
 import { toast } from 'react-hot-toast';
+import FlipNumbers from 'react-flip-numbers';
 
 function ContestCard({ d }) {
 
     const router = useRouter();
-    let [joined, setJoined] = useState(0)
+    let [joined, setJoined] = useState(d?.total_teams)
+    const [game, setGame] = useAtom(apiAtom.gameDetail)
 
     const [open, setOpen] = useAtom(apiAtom.modal.findMyGroup)
     const [isComplete, setIsComplete] = useState(false)
@@ -40,7 +42,12 @@ function ContestCard({ d }) {
                     if (d?.has_joined > 0) {
                         API.findMyGroup({ body: { contest_id: d?.id } }, (c) => {
                             setOpen(true);
-                            router.push(`http://game.fantasysquad.in/game/knife_ninja?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}`);
+                            if (!game?.url) {
+                                setOpen(false);
+                                return;
+                            }
+                            // router.push(`http://game.fantasysquad.in/game/knife_ninja?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}`);
+                            router.push(`${game?.url}?user_id=${c?.user?.user_id}&group_id=${c?.group?.id}&contest_id=${c?.contest?.id}&token=${tkn}&game_id=${d?.hg_game_id}`);
 
                             // user_id=8a88bce9-9b40-410c-a22d-0d0cb7df170b&group_id=466&contest_id=457&token=8a88bce9-9b40-410c-a22d-0d0cb7df170b|hmW1iDtLXcxL8e1zGxp5XxPaQOed4WTJIYcsT8oJVMKrLgAiQ3&score=540
                         }, tkn, () => {
@@ -96,8 +103,9 @@ function ContestCard({ d }) {
         API.Socket((s) => {
             s.on("new-user-joined", (data) => {
                 // toast.success(`new user joined ${data.contest_id} ${d?.id} `)
+
                 if (data.contest_id == d?.id) {
-                    setJoined(p => d?.total_teams + 1);
+                    setJoined(p => p + 1);
                 }
             })
         })
@@ -155,7 +163,7 @@ function ContestCard({ d }) {
                 <div className="affliliate-card">
                     <div className="heading haesding2">
                         <div className="battle">
-                            <img src="/img/battle.png" alt="#" />
+                            <img src="/img/battle.png" />
                             <h5>Battle</h5>
                         </div>
                         <div className="fee">
@@ -185,8 +193,6 @@ function ContestCard({ d }) {
                         </div>
                         {
                             parseFloat(d?.bonus || "0") > 0 ?
-
-
                                 <div className='ccrd-bonus' >
                                     <img src='/img/bonus.jpeg' />
                                     <h6> {`${parseInt(d?.bonus)}% Bonus`} </h6>
@@ -197,7 +203,9 @@ function ContestCard({ d }) {
 
                             <div className="awad">
                                 <img src="/img/user.png" width={20} />
-                                <h6> {joined > 0 ? joined : d?.total_teams} </h6>
+
+
+                                <FlipNumbers height={16} width={10} numberStyle={{ fontWeight: "bold", margin: 0 }} perspective={1000} color="black" background="white" play numbers={`${joined > 0 ? joined : d?.total_teams}`} />
                             </div>
 
                             <div className="awad">
@@ -205,7 +213,7 @@ function ContestCard({ d }) {
                                 <h6> ₹ {d?.prize} </h6>
                             </div>
                             <div className="awad">
-                                <img src="/img/award.png" alt="#" />
+                                <img src="/img/award.png" />
                                 <h6>1</h6>
                             </div>
                         </div>

@@ -1113,3 +1113,131 @@ body {
 	}
 }
 
+
+
+
+
+
+
+
+
+// leaderboard//
+.left-arrow img {
+    width: 23px;
+    height: 23px;
+}
+.leader h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+}
+.leader {
+    margin: 0 auto;
+}
+.leaderboard-rank {
+    background-color: #eb4b24;
+    display: flex;
+    justify-content: space-around;
+	align-items: center;
+	padding-bottom: 50px;
+    border-radius: 0 0 15px 15px;
+}
+.first-rank h5 {
+    margin: 0;
+    color: #fff;
+	font-size: 27px;
+}
+.first-rank h6 {
+    margin: 0;
+}
+.name-win {
+    font-weight: 500;
+    font-size: 23px;
+}
+.points {
+    font-size: 15px;
+    font-weight: 400;
+}
+.first-rank {
+    text-align: center;
+}
+.rank-dp {
+    width: 80px;
+    height: 80px;
+}
+.firstrank-dp {
+    width: 120px;
+    height: 120px;
+}
+.crown {
+    width: 50px;
+    height: 50px;
+    display: inherit;
+    margin: 0 auto;
+}
+.first-rank {
+    color: #fff;
+}
+.teams-main {
+    background-color: #e03309;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+	margin: 20px 0px;
+}
+.teams-main h6 {
+    font-size: 13px;
+    font-weight: 400;
+    margin: unset;
+    padding: 13px 20px;
+}
+.team-dp{
+	width: 46px;
+	height: 46px;
+}
+.team-bg{
+	background-color: #ff5b3421;
+	box-shadow :(-2px 1px 4px rgba(0, 0, 0, 0.25));
+	border-radius:5px;
+}
+.tb{
+	border-collapse: collapse;
+	width: 100%;
+}
+// .rank-team {
+//     padding-left: 47px;
+// }
+
+.team-img h5{
+	margin: 0;
+}
+.tename h5 {
+    margin: 0;
+	font-size: 14px;
+	margin: 0px 0px 3px 0;
+}
+.tename h6 {
+    margin: 0;
+	color: #707070;
+	font-size: 12px;
+	font-weight: 500;
+}
+.teamane-main {
+    display: flex;
+    align-items: center;
+	padding: 10px;
+}
+.tename {
+    padding-left: 17px;
+}
+.rankt {
+    font-size: 15px;
+    margin-left: -20px;
+}
+.teamname {
+    margin: 0px 10px 10px 10px;
+}
+.team-bg2{
+	border-radius: 5px;
+	box-shadow :(-2px 1px 4px rgba(0, 0, 0, 0.25));
+}
