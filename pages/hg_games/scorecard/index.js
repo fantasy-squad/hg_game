@@ -27,7 +27,7 @@ function ScoreCard() {
 
         });
 
-        if (game_id) {
+        if (game_id && tkn) {
 
 
             API.gameDetail({ id: game_id }, (d) => {
@@ -50,9 +50,29 @@ function ScoreCard() {
             }, (d) => {
 
             }, tkn, () => {
+                API.getScore({
+                    body: {
+                        contest_id,
+                        user_id,
+                        group_id,
+                    }
+                }, (d) => {
 
+                }, tkn, () => {
+                    API.getScore({
+                        body: {
+                            contest_id,
+                            user_id,
+                            group_id,
+                        }
+                    }, (d) => {
+
+                    }, tkn, () => {
+
+                    })
+                })
             })
-        }, 30000)
+        }, 30000);
 
     }, [router.isReady]);
 

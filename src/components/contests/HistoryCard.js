@@ -13,8 +13,9 @@ function HistoryCard({ d, i }) {
         if (d?.member && d?.oponents?.length) {
             let m = d?.member;
             let o = d?.oponents[0];
-
-            if (m?.status == "CANCELED") {
+            if (m?.status == "NOT STARTED" || m?.status == "LIVE") {
+                setText("NOT STARTED");
+            } else if (m?.status == "CANCELED") {
                 setText("CANCELED");
             } else if (m?.rank < o?.rank) {
                 setText("WON")

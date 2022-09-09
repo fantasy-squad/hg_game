@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import FlipNumbers from 'react-flip-numbers';
+import React from 'react'
+
 
 
 
 function HgGames() {
 
 
-return (
-    <>
-   <div className="mobileview">
-            <div className="mobile-header leader">
+    return (
+        <>
+            <div className="mobileview">
+                <div className="mobile-header leader">
                     <div className="left-arrow">
-                    <img src="/img/left-arrow.png" alt="" />
+                        <img src="/img/left-arrow.png" alt="" />
                     </div>
                     <div className="leader">
                         <h5>SERIES LEADERBOARD</h5>
@@ -53,98 +53,88 @@ return (
                 </div>
                 <div className="teamname">
                     <table className='tb' >
-                    <tr className='team-bg'>
-                        <td>
-                            <div className="teamane-main">
-                            <div className="team-img">
-                            <img src="/img/captain.png" alt="" className='team-dp' />
-                            </div>
-                            <div className="tename">
-                            <h5>Teamname</h5>
-                            <h6>1400 Points</h6>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <h5 className='rankt'>#15</h5>
-                        </td>
+                        <tr className='team-bg'>
+                            <td>
+                                <div className="teamane-main">
+                                    <div className="team-img">
+                                        <img src="/img/captain.png" alt="" className='team-dp' />
+                                    </div>
+                                    <div className="tename">
+                                        <h5>Teamname</h5>
+                                        <h6>1400 Points</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5 className='rankt'>#15</h5>
+                            </td>
 
-                    </tr>
+                        </tr>
                     </table>
                 </div>
                 <div className="teamname">
                     <table className='tb' >
-                    <tr className='team-bg2'>
-                        <td>
-                            <div className="teamane-main">
-                            <div className="team-img">
-                            <img src="/img/captain.png" alt="" className='team-dp' />
-                            </div>
-                            <div className="tename">
-                            <h5>Teamname</h5>
-                            <h6>1400 Points</h6>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <h5 className='rankt'>#15</h5>
-                        </td>
+                        <tr className='team-bg2'>
+                            <td>
+                                <div className="teamane-main">
+                                    <div className="team-img">
+                                        <img src="/img/captain.png" alt="" className='team-dp' />
+                                    </div>
+                                    <div className="tename">
+                                        <h5>Teamname</h5>
+                                        <h6>1400 Points</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5 className='rankt'>#15</h5>
+                            </td>
 
-                    </tr>
+                        </tr>
                     </table>
                 </div>
                 <div className="teamname">
                     <table className='tb' >
-                    <tr className='team-bg2'>
-                        <td>
-                            <div className="teamane-main">
-                            <div className="team-img">
-                            <img src="/img/captain.png" alt="" className='team-dp' />
-                            </div>
-                            <div className="tename">
-                            <h5>Teamname</h5>
-                            <h6>1400 Points</h6>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <h5 className='rankt'>#15</h5>
-                        </td>
+                        <tr className='team-bg2'>
+                            <td>
+                                <div className="teamane-main">
+                                    <div className="team-img">
+                                        <img src="/img/captain.png" alt="" className='team-dp' />
+                                    </div>
+                                    <div className="tename">
+                                        <h5>Teamname</h5>
+                                        <h6>1400 Points</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5 className='rankt'>#15</h5>
+                            </td>
 
-                    </tr>
+                        </tr>
                     </table>
                 </div>
                 <div className="teamname">
                     <table className='tb' >
-                    <tr className='team-bg2'>
-                        <td>
-                            <div className="teamane-main">
-                            <div className="team-img">
-                            <img src="/img/captain.png" alt="" className='team-dp' />
-                            </div>
-                            <div className="tename">
-                            <h5>Teamname</h5>
-                            <h6>1400 Points</h6>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <h5 className='rankt'>#15</h5>
-                        </td>
+                        <tr className='team-bg2'>
+                            <td>
+                                <div className="teamane-main">
+                                    <div className="team-img">
+                                        <img src="/img/captain.png" alt="" className='team-dp' />
+                                    </div>
+                                    <div className="tename">
+                                        <h5>Teamname</h5>
+                                        <h6>1400 Points</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5 className='rankt'>#15</h5>
+                            </td>
 
-                    </tr>
+                        </tr>
                     </table>
                 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -154,7 +144,7 @@ return (
 
 
 
-   </>
+        </>
     )
 }
 

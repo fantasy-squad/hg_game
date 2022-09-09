@@ -1216,11 +1216,16 @@ lines {
 }
 .leaderboard-rank {
 	background-color: #eb4b24;
+	background-image: url(https://img.freepik.com/premium-photo/white-standard-3d-game-controller-joystick-gamepad-orange-background-with-abstract-geometric-shapes-3d-rendering_558349-57.jpg?w=1380);
+	background-color: #0000003a;
+	background-blend-mode: darken;
+	background-position: center;
+	background-size: cover;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	padding-bottom: 50px;
-	border-radius: 0 0 15px 15px;
+	border-radius: 0 0 50px 50px;
 }
 .first-rank h5 {
 	margin: 0;
@@ -1232,22 +1237,27 @@ lines {
 }
 .name-win {
 	font-weight: 500;
-	font-size: 23px;
+	font-size: 12px;
+	color: rgb(238, 238, 238);
 }
 .points {
-	font-size: 15px;
+	font-size: 20px;
 	font-weight: 400;
 }
 .first-rank {
 	text-align: center;
 }
 .rank-dp {
-	width: 80px;
-	height: 80px;
+	width: 60px;
+	height: 60px;
+	border: 5px solid #ffff;
+	border-radius: 50%;
 }
 .firstrank-dp {
-	width: 120px;
-	height: 120px;
+	width: 100px;
+	height: 100px;
+	border: 5px solid #ffff;
+	border-radius: 50%;
 }
 .crown {
 	width: 50px;
@@ -1276,9 +1286,26 @@ lines {
 	height: 46px;
 }
 .team-bg {
-	background-color: #ff5b3421;
 	box-shadow: (-2px 1px 4px rgba(0, 0, 0, 0.25));
-	border-radius: 5px;
+	border-radius: 15px;
+	display: flex;
+	margin: 10px 0;
+	align-items: center;
+	justify-content: center;
+	.tb-l {
+		width: 80%;
+		height: 100%;
+	}
+	.tb-r {
+		width: 20%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+.tb-mine {
+	background-color: #ff5b3421;
 }
 .tb {
 	border-collapse: collapse;
@@ -1319,43 +1346,44 @@ lines {
 }
 .team-bg2 {
 	border-radius: 5px;
-	box-shadow :(-2px 1px 4px rgba(0, 0, 0, 0.25));
+	box-shadow: (-2px 1px 4px rgba(0, 0, 0, 0.25));
+	margin: 20px 0;
 }
-.grand-contest{
+.grand-contest {
 	background-color: #fff;
 	box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
 }
-.kniiif-img{
+.kniiif-img {
 	img {
 		width: 80px;
 		height: 80px;
 		border-radius: 5px;
 	}
 }
-.grand-star{
+.grand-star {
 	display: flex;
 	img {
 		width: 15px;
 		height: 15px;
-	} 
+	}
 	h6 {
-    margin: 2px 0px 0px 7px;
-}
+		margin: 2px 0px 0px 7px;
+	}
 }
 .grand-con {
-    display: flex;
+	display: flex;
 	padding: 15px;
 }
-.grand-prize{
+.grand-prize {
 	.grand-star img {
 		width: 15px;
 		height: 15px;
 	}
-	
+
 	.grand-star {
 		display: flex;
 	}
-	
+
 	.grand-star h6 {
 		margin: 2px 0px 0px 7px;
 	}
@@ -1363,7 +1391,7 @@ lines {
 		margin: 5px 0px 0px 0px;
 		font-size: 18px;
 	}
-	
+
 	p {
 		margin: 5px 0 0 0;
 		font-size: 13px;
@@ -1371,16 +1399,16 @@ lines {
 	}
 }
 .grand-content {
-    padding: 0 15px;
+	padding: 0 15px;
 }
 
 .play-user {
-    display: flex;
+	display: flex;
 	img {
 		width: 18px;
 		height: 17px;
 	}
-	
+
 	p {
 		margin: 2px;
 		font-size: 12px;
@@ -1389,44 +1417,114 @@ lines {
 }
 
 .time {
-    width: 18px;
-    height: 18px;
+	width: 18px;
+	height: 18px;
 }
 .mon {
-    margin-left: 4px;
+	margin-left: 4px;
 }
 .play-content {
-    padding: 0px 0px 15px 15px;
+	padding: 0px 0px 15px 15px;
 }
 .play-user {
-    margin: 3px 0px;
+	margin: 3px 0px;
 }
 .play-wiin {
-    display: flex;
-    justify-content: space-between;
-}
-.play-btn{
-		button{
-			background: #00b218;
-			border-radius: 4px;
-			border: 1px solid #00b218;
-			color: #fff;
-			font-weight: 700;
-			padding: 10px 18px;
-			cursor: pointer;
-		}
+	display: flex;
+	justify-content: space-between;
 }
 .play-btn {
-    margin: 15px;
+	button {
+		background: #00b218;
+		border-radius: 4px;
+		border: 1px solid #00b218;
+		color: #fff;
+		font-weight: 700;
+		padding: 10px 18px;
+		cursor: pointer;
+	}
+}
+.play-btn {
+	margin: 15px;
 }
 .grand-contest {
-    background-color: #fff;
-    box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
-    border-radius: 5px;
-    margin: 15px 15px 0 15px;
+	background-color: #fff;
+	box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
+	border-radius: 5px;
+	margin: 15px 15px 0 15px;
 }
+
+.prize-breakup {
+	background-color: #fff;
+	box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
+	border-radius: 5px;
+	margin: 15px 15px 0 15px;
+	.pb-head {
+		margin: 0 auto;
+		width: 90%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		p {
+			font-size: 12px;
+			color: #b4adba;
+		}
+	}
+	.pb-row {
+		margin: 0 auto;
+		width: 90%;
+		height: 30px;
+		padding: 0 2%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		p {
+			font-size: 12px;
+			color: #736d7d;
+			&:nth-child(2) {
+				color: #83230b;
+			}
+		}
+	}
+	.pb-even {
+		background-color: #ff5b3421;
+	}
+}
+
 .tour-img img {
-    width: 34px;
-    height: 34px;
-    border-radius: 4px;
+	width: 34px;
+	height: 34px;
+	border-radius: 4px;
+}
+
+.prize-heading {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	.left-arrow {
+		margin-right: 20px;
+	}
+	.tournament {
+		img {
+			width: 40px !important;
+			height: 40px !important;
+			border-radius: 50px;
+		}
+		margin-right: 10px;
+	}
+	.ph-3 {
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		flex-direction: column;
+		h6 {
+			font-weight: 900;
+			margin: 0 !important;
+		}
+		small {
+			font-size: 70%;
+			color: #f3f3f3;
+		}
+	}
 }
