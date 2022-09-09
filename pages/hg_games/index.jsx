@@ -42,9 +42,16 @@ function HgGames() {
                             <p>703/1.5k  Players</p>
                         </div>
                         <div className="play-user">
-                            <img src="/img/1st.png" alt="" />
-                            <p>703/1.5k  Players</p>
+                            <img src="/img/1st.png" alt="" className='mon'   />
+                            <p>₹80  Players</p>
                         </div>
+                        <div className="play-user">
+                            <img src="/img/time.png" alt="" className='time' />
+                            <p className='mon'>9:30pm, Aug31 - 9:30 pm, Sep 1</p>
+                        </div>
+                    </div>
+                    <div className="play-btn">
+                        <button>Play ₹1</button>
                     </div>
                 </div>
             </div>   
