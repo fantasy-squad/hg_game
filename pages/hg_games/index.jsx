@@ -19,7 +19,35 @@ function HgGames() {
                 <h6 className="mx-auto">knif hit</h6>
                 <img src="/img/wallet.png" className="wallet" />
             </div>
-
+            <div className="grand-contest">
+                <div className="grand-con">
+                    <div className="kniiif-img">
+                        <img src="/img/contest-knif.png" alt="" />
+                    </div>
+                    <div className="grand-content">
+                        <div className="grand-star">
+                            <img src="/img/star.png" alt="" />
+                            <h6>GRAND CONTEST!</h6>
+                        </div>
+                        <div className="grand-prize">
+                            <h5>₹1000</h5>
+                            <p>Make your highest score and win unreal cash<span> rewards T&C Apply!</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div className="play-wiin">
+                    <div className="play-content">
+                        <div className="play-user">
+                            <img src="/img/user.png" alt="" />
+                            <p>703/1.5k  Players</p>
+                        </div>
+                        <div className="play-user">
+                            <img src="/img/1st.png" alt="" />
+                            <p>703/1.5k  Players</p>
+                        </div>
+                    </div>
+                </div>
+            </div>   
             <div className="mobile-main">
                 <div className="affiliate-main">
                     <div className="affliliate-card">
