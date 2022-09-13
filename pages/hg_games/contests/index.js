@@ -111,6 +111,44 @@ function Contests() {
                     <div className="affiliate-main">
                         {tab == "battle" ? <PracticeCard /> : <></>}
 
+                        {/* <div className="grand-contest">
+                            <div className="grand-con">
+                                <div className="kniiif-img">
+                                    <img src="/img/contest-knif.png" alt="" />
+                                </div>
+                                <div className="grand-content">
+                                    <div className="grand-star">
+                                        <img src="/img/star.png" alt="" />
+                                        <h6>GRAND CONTEST!</h6>
+                                    </div>
+                                    <div className="grand-prize">
+                                        <h5>₹1000</h5>
+                                        <p>Make your highest score and win unreal cash<span> rewards T&C Apply!</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="play-wiin">
+                                <div className="play-content">
+                                    <div className="play-user">
+                                        <img src="/img/user.png" alt="" />
+                                        <p>703/1.5k  Players</p>
+                                    </div>
+                                    <div className="play-user">
+                                        <img src="/img/1st.png" alt="" className='mon' />
+                                        <p>₹80  Players</p>
+                                    </div>
+                                    <div className="play-user">
+                                        <img src="/img/time.png" alt="" className='time' />
+                                        <p className='mon'>9:30pm, Aug31 - 9:30 pm, Sep 1</p>
+                                    </div>
+                                </div>
+                                <div className="play-btn">
+                                    <button>Play ₹1</button>
+                                </div>
+                            </div>
+                        </div>
+                        <br /> */}
+
                         {
                             tab == "battle" ?
                                 (list.length ?

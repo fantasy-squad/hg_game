@@ -81,7 +81,18 @@ function ScoreCard() {
         let user_id = router?.query?.user_id;
         let contest_id = router?.query?.contest_id;
         let group_id = router?.query?.group_id;
+        API.getScore({
+            body: {
+                contest_id,
+                user_id,
+                group_id,
+            }
+        }, (d) => {
+
+        }, tkn, () => { });
         if (data?.contest?.hg_game_id) {
+
+
 
             router.push(`/hg_games/contests?user_id=${user_id}&token=${tkn}&game_id=${data?.contest?.hg_game_id}`)
         }
