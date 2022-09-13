@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 
 
@@ -21,6 +21,10 @@ function ContestCard({ d }) {
     const [time, setTime] = useState(null)
     const [seconds, setSeconds] = useState(d?.duration + 3 || 10);
     const [list, setContestList] = useAtom(apiAtom.contestList);
+
+    const [animate, setAnimate] = useState(false);
+    const ref = useRef(null);
+
 
 
 
@@ -55,8 +59,6 @@ function ContestCard({ d }) {
                         }, tkn, () => {
 
                             API.contestList({ params: { game_id: d?.hg_game_id } }, (d) => {
-
-
                             }, tkn);
                         })
 
@@ -64,6 +66,21 @@ function ContestCard({ d }) {
                         let has_joined = list?.filter(f => f?.has_joined > 0);
 
                         if (has_joined.length > 0) {
+
+                            if (ref.current) {
+                                ref.current.style.position = "relative";
+                                ref.current.style.width = "100%";
+                                ref.current.style.boxShadow = "rgba(0, 0, 0, 0.35) 0px 5px 15px";
+                                ref.current.style.transition = "1s";
+                                ref.current.style.transform = "translate(100%, 0px)";
+
+                                setTimeout(() => {
+                                    setAnimate(true)
+                                    if (ref.current) {
+                                        ref.current.style.display = "none";
+                                    }
+                                }, 1000);
+                            }
                             return;
                         }
 
@@ -133,7 +150,18 @@ function ContestCard({ d }) {
             "m": minutes,
             "s": seconds
         };
-        return `Starting in ${hours}h:${minutes}m:${seconds}s`;
+        if (hours > 0) {
+            return `Starting in ${hours}h:${minutes}m:${seconds}s`;
+        } else if (minutes > 0) {
+            return `Starting in ${minutes}m:${seconds}s`;
+        } else if (seconds > 0) {
+            if (seconds <= 1) {
+                return ''
+            }
+            return `Starting in ${seconds}s`;
+        } else {
+            return ''
+        }
     }
 
 
@@ -167,7 +195,7 @@ function ContestCard({ d }) {
 
     return (
         <>
-            <div className='contest-card' >
+            <div className={`contest-card`} ref={ref} >
                 <div className="affliliate-card">
                     <div className="heading haesding2">
                         <div className="battle">
@@ -228,7 +256,10 @@ function ContestCard({ d }) {
                     </div>
                 </div>
             </div>
-            <br />
+            {
+                animate ? <></> :
+                    <br />
+            }
         </>
     )
 }
