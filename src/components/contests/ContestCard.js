@@ -20,6 +20,8 @@ function ContestCard({ d }) {
     // const [timer, setTimer] = useState(0)
     const [time, setTime] = useState(null)
     const [seconds, setSeconds] = useState(d?.duration + 3 || 10);
+    const [list, setContestList] = useAtom(apiAtom.contestList);
+
 
 
     useEffect(() => {
@@ -59,6 +61,12 @@ function ContestCard({ d }) {
                         })
 
                     } else {
+                        let has_joined = list?.filter(f => f?.has_joined > 0);
+
+                        if (has_joined.length > 0) {
+                            return;
+                        }
+
                         API.contestList({ params: { game_id: d?.hg_game_id } }, (d) => {
 
 
