@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 
 import Collapsible from 'react-collapsible';
+import { useRouter } from 'next/router';
+import API from '../../api/services/API';
 
 
 function HistoryCard({ d, i }) {
+    const router = useRouter()
 
     const [open, setOpen] = useState(false);
     const [text, setText] = useState("")
@@ -33,11 +36,32 @@ function HistoryCard({ d, i }) {
     }
 
 
+    const fetchRank = () => {
+        let tkn = router?.query?.token;
+        if (!tkn) return;
+
+        API.getScore({
+            body: {
+                contest_id: d?.contest?.id,
+                user_id: d?.member?.user?.id,
+                group_id: d?.member?.hg_group_id,
+            }
+        }, (api_data) => {
+            console.log(d?.member?.hg_game_id)
+            API.myHistory({ params: { game_id: d?.member?.hg_game_id } }, (api_data_2) => {
+
+
+            }, tkn);
+        }, tkn, () => {
+
+        })
+    }
+
 
     return (
         <>
-            <div className="history-content" onClick={handleOpen}  >
-                <div className="history-main">
+            <div className="history-content"  >
+                <div className="history-main" onClick={handleOpen} >
                     <div className="battle-main">
                         <div className="battle">
                             <img src="/img/battle.png" alt="" />
@@ -119,15 +143,16 @@ function HistoryCard({ d, i }) {
                                 </tbody>
                             </table>
 
+
                             {
-                                (moment(moment().format('YYYY-MM-DD HH:mm:ss')).diff(moment(d?.contest?.starting_at).add(d?.contest?.duration + 6, 'minutes').format('YYYY-MM-DD HH:mm:ss'), 'minutes') > 0 && d?.status == "LIVE")
+                                (moment(moment().format('YYYY-MM-DD HH:mm:ss')).diff(moment(d?.contest?.starting_at).add(d?.contest?.duration + 6, 'minutes').format('YYYY-MM-DD HH:mm:ss'), 'minutes') > 0 && d?.member?.status == "LIVE")
 
 
 
                                     ?
                                     < div className='hr-btn' >
 
-                                        <button>Fetch Rank  </button>
+                                        <button onClick={fetchRank} >Fetch Rank</button>
                                     </div>
                                     : ""
                             }
