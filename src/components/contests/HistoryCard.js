@@ -118,16 +118,19 @@ function HistoryCard({ d, i }) {
 
                                 </tbody>
                             </table>
-                            {/* {
-                                moment(moment().format('YYYY-MM-DD HH:mm:ss')).diff(moment(d?.contest?.starting_at).add(d?.contest?.duration), 'minutes') > 0
+
+                            {
+                                (moment(moment().format('YYYY-MM-DD HH:mm:ss')).diff(moment(d?.contest?.starting_at).add(d?.contest?.duration + 6, 'minutes').format('YYYY-MM-DD HH:mm:ss'), 'minutes') > 0 && d?.status == "LIVE")
+
+
 
                                     ?
                                     < div className='hr-btn' >
 
-                                        <button>Fetch Rank</button>
+                                        <button>Fetch Rank  </button>
                                     </div>
                                     : ""
-                            } */}
+                            }
                         </div>
                         : ""}
             </div>
