@@ -1912,6 +1912,7 @@ emoji.funny {
 	position: fixed;
 	background: #f1f1f1;
 	bottom: 150px;
+	z-index: 100;
 	right: 10px;
 	animation: chatAnime 0.2s 1;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
