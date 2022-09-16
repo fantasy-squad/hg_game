@@ -209,8 +209,11 @@ function ContestCard({ d }) {
                     <div className="heading">
                         <div className="part">
                             <h5>
+
                                 {
-                                    d?.type
+                                    d?.type == "PAID" ?
+                                        `WIN ₹${`${d?.prize}`.includes('.00') ?
+                                            parseFloat(d?.prize || "0").toFixed(0) : d?.prize}` : d?.type
                                 }
                             </h5>
                         </div>
@@ -219,7 +222,7 @@ function ContestCard({ d }) {
                         </p>
                         <div className="free">
                             <button onClick={handleJoin} >{
-                                d?.has_joined > 0 ? "JOINED" : d?.type == "FREE" ? "FREE" : "₹" + d?.entry_fee
+                                d?.has_joined > 0 ? "JOINED" : d?.type == "FREE" ? "FREE" : "₹" + `${`${d?.entry_fee}`.includes('.00') ? parseFloat(d?.entry_fee || '0').toFixed(0) : d?.entry_fee}`
                             }</button>
                         </div>
                     </div>
@@ -242,12 +245,13 @@ function ContestCard({ d }) {
 
 
                                 <FlipNumbers height={16} width={10} numberStyle={{ fontWeight: "bold", margin: 0 }} perspective={1000} color="black" background="white" play numbers={`${joined > 0 ? joined : d?.total_teams}`} />
+                                <p>{"   JOINED"}</p>
                             </div>
 
-                            <div className="awad">
+                            {/* <div className="awad">
                                 <img src="/img/winning.jpeg" width={15} />
                                 <h6> ₹ {d?.prize} </h6>
-                            </div>
+                            </div> */}
                             <div className="awad">
                                 <img src="/img/award.png" />
                                 <h6>1</h6>

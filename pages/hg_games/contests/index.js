@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast';
@@ -11,15 +11,37 @@ import GlobalModal from '../../../src/components/Modal/GloabModal';
 import FindMyGroupModal from '../../../src/components/contests/FindMyGroupModal';
 import HistoryCard from '../../../src/components/contests/HistoryCard';
 import PracticeCard from '../../../src/components/contests/PracticeCard';
+import GrandContestCard from '../../../src/components/contests/GrandContestCard';
+import useDetectKeyboardOpen from 'use-detect-keyboard-open';
+
 
 
 function Contests() {
+    const isKeyboardOpen = useDetectKeyboardOpen();
+    const [attempt, setAttempt] = useState(0)
+    const [new_msg, setNewMsg] = useState(null)
+
+    useEffect(() => {
+        if (attempt < 1) {
+            if (isKeyboardOpen) {
+                toast("Full Screen Mode ")
+                setAttempt(p => p + 1)
+            }
+        }
+    }, [isKeyboardOpen])
+
 
     const router = useRouter();
     const [list, setContestList] = useAtom(apiAtom.contestList);
     const [history, setHistory] = useAtom(apiAtom.historyList)
     const [game, setGame] = useAtom(apiAtom.gameDetail)
     const [tab, setTab] = useState("battle") // battle || history
+    const user = useAtomValue(apiAtom.user)
+    const [chat, setChat] = useState([]);
+    const [msg, setMsg] = useState('')
+    const [typing, setType] = useState(null);
+
+    const [show, setShow] = useState(false)
 
 
 
@@ -39,10 +61,42 @@ function Contests() {
         }, tkn);
 
         API.gameDetail({ id: game_id }, (d) => {
+            API.Socket(s => {
+                s.emit('join-chat', { game_id })
+            })
+        }, tkn);
 
-        }, tkn)
+        API.me({}, (d) => {
+
+        }, tkn);
 
 
+
+        API.Socket(s => {
+            s.on('receive-chat', (d) => {
+
+                setChat(p => [...p, d])
+                setNewMsg(d)
+                setTimeout(() => {
+                    setNewMsg(null)
+
+                }, 2000)
+            })
+
+            s.on('user-typing', (d) => {
+
+                setType(d)
+
+            })
+
+
+            s.on('user-no-longer-typing', (d) => {
+
+                setType(null)
+
+            })
+
+        })
 
 
 
@@ -76,6 +130,77 @@ function Contests() {
 
     }
 
+    const sendChat = (e) => {
+        e?.preventDefault();
+        if (!msg) {
+            return;
+        }
+        API.Socket(s => {
+            let chat_data = {
+                game_id: router?.query?.game_id,
+                chat: msg || "Hello test chat",
+                user: {
+                    id: user?.id,
+                    photo: user?.photo,
+                    name: user?.username,
+                }
+            }
+
+            s.emit('send-chat', chat_data)
+            setChat(p => [...p, { ...chat_data, mine: true }])
+            setMsg('')
+        })
+    }
+
+    useEffect(() => {
+        let timer;
+        if (!msg) {
+            timer = setTimeout(userNoLongertyping, 2000);
+            return;
+        }
+
+
+        API.Socket(s => {
+
+            let chat_data = {
+                game_id: router?.query?.game_id,
+                user: {
+                    id: user?.id,
+                    photo: user?.photo,
+                    name: user?.username,
+                    role: user?.role,
+                }
+            }
+            s.emit('user-typed', chat_data)
+
+
+
+
+        });
+
+        timer = setTimeout(userNoLongertyping, 1000);
+        return () => {
+            clearTimeout(timer)
+
+        }
+
+    }, [msg])
+
+    const userNoLongertyping = () => {
+        API.Socket(s => {
+
+            s.emit('user-stopped', {
+                game_id: router?.query?.game_id,
+                user: {
+                    id: user?.id,
+                    photo: user?.photo,
+                    name: user?.username,
+                }
+            })
+
+        })
+    }
+
     return (
         <>
 
@@ -105,6 +230,96 @@ function Contests() {
 
                     }
                     <img src="/img/wallet.png" className="wallet" style={{ opacity: 0 }} />
+                </div>
+                {
+                    show ?
+
+                        <div class={`chat-main ${isKeyboardOpen ? "keyboard-chat-main" : ""} `}>
+                            <ol class="chat">
+                                <div class="menu">
+                                    <div class="back2">
+                                        <img src={game?.image || ""} draggable="false" />
+                                        <h5>{game?.name}</h5>
+                                    </div>
+                                </div>
+                                <div class="chats">
+                                    {
+                                        chat?.length ?
+                                            chat?.map(c => {
+                                                return (
+                                                    <li class={c?.mine ? "self" : "other"}>
+                                                        <div class="avatar">
+                                                            <img src={c?.user?.photo || "https://i.imgur.com/HYcn9xO.png"} draggable="false" />
+                                                        </div>
+                                                        <div class="msg">
+                                                            <h6>{c?.user?.name}</h6>
+                                                            <p >{c?.chat}</p>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })
+                                            : ""
+                                    }
+
+                                    {
+                                        typing ?
+                                            <li class={"other"}>
+                                                <div class="avatar">
+                                                    <img src={typing?.user?.photo || "https://i.imgur.com/HYcn9xO.png"} draggable="false" />
+                                                </div>
+                                                <div class="msg">
+                                                    <h6>{typing?.user?.name}</h6>
+                                                    <div class="chat-bubble">
+                                                        <div class="typing">
+                                                            <div class="dot"></div>
+                                                            <div class="dot"></div>
+                                                            <div class="dot"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                            : ""
+                                    }
+
+
+
+
+
+                                </div>
+                            </ol>
+                            <form onSubmit={sendChat} >
+                                <input class="textarea" type={"text"} placeholder="Write a Massage" value={msg} onChange={(e) => setMsg(e.target.value)} />
+                            </form>
+                        </div>
+                        : <></>
+                }
+
+                {
+                    (new_msg && !show) ?
+
+                        <div className='msg-icon-info-label' >
+                            <p>{new_msg?.chat}</p>
+                        </div>
+                        : <></>
+                }
+                <div class="msg-icon" onClick={() => setShow(p => !p)} >
+
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 800 800"
+                        height="32px"
+                        width="32px"
+                        role="img"
+                        alt="Chat icon"
+                        class="tawk-min-chat-icon">
+                        <path
+                            fill="#fff"
+                            clip-rule="evenodd"
+                            d="M400 26.2c-193.3 0-350 156.7-350 350 0 136.2 77.9 254.3 191.5 312.1 15.4 8.1 31.4 15.1 48.1 20.8l-16.5 63.5c-2 7.8 5.4 14.7 13 12.1l229.8-77.6c14.6-5.3 28.8-11.6 42.4-18.7C672 630.6 750 512.5 750 376.2c0-193.3-156.7-350-350-350zm211.1 510.7c-10.8 26.5-41.9 77.2-121.5 77.2-79.9 0-110.9-51-121.6-77.4-2.8-6.8 5-13.4 13.8-11.8 76.2 13.7 147.7 13 215.3.3 8.9-1.8 16.8 4.8 14 11.7z"
+                        ></path>
+                    </svg>
                 </div>
 
                 <div className="mobile-main">
@@ -153,6 +368,9 @@ function Contests() {
                             tab == "battle" ?
                                 (list.length ?
                                     list.map((d) => {
+                                        // if (!d?.is_mega) {
+                                        //     return <GrandContestCard d={d} key={d?.id} />
+                                        // }
                                         return (
 
                                             <ContestCard d={d} key={d?.id} />
@@ -181,7 +399,9 @@ function Contests() {
 
                         <FindMyGroupModal />
                     </div>
+
                 </div>
+
                 <div className="contest-fab">
                     <button className={tab == "battle" ? 'cf-active' : ""} onClick={handlTab('battle')} >
                         <svg id="sword_battle_icon_206195" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">

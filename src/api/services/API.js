@@ -142,6 +142,23 @@ export default {
 			.catch((err) => console.log(err));
 	},
 
+	me: ({ params }, cb, token) => {
+
+		api
+			.get(`auth/me`, params, token)
+			.then((d) => {
+				console.log("🚀 ~ file: API.js ~ line 51 ~ .then ~ d", d)
+
+				if (d.status) {
+					writeAtom(apiAtom.user, d?.data);
+					return cb(d);
+				} else {
+					// return toast.error(d?.message)
+				}
+			})
+			.catch((err) => console.log(err));
+	},
+
 	Socket: (cb) => {
 
 		let socket = readAtom(apiAtom.socket)

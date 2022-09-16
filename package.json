@@ -30,7 +30,8 @@
     "react-modal": "^3.15.1",
     "react-swipeable-views": "^0.14.0",
     "sass": "^1.54.6",
-    "socket.io-client": "^4.5.1"
+    "socket.io-client": "^4.5.1",
+    "use-detect-keyboard-open": "^0.2.0"
   },
   "devDependencies": {
     "eslint": "8.23.0",
