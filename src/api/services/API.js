@@ -39,6 +39,31 @@ export default {
 			.catch((err) => console.log(err));
 	},
 
+	joinMega: ({ body, params }, cb, token) => {
+		const schema = Joi.object({
+			contest_id: Joi.number().required(),
+		}).validate(body);
+
+		if (schema.error) {
+			return toast.error(schema.error.message);
+		}
+
+		api
+			.post("html_game/join-mega", body, params, token)
+			.then((d) => {
+				if (d.status) {
+					toast.success(d.message);
+					return cb(d);
+				} else {
+
+					return toast.error(d.message);
+				}
+			})
+			.catch((err) => console.log(err));
+	},
+
+
+
 	findMyGroup: ({ body, params }, cb, token, err = () => { }) => {
 		const schema = Joi.object({
 			contest_id: Joi.number().required(),
@@ -91,7 +116,7 @@ export default {
 
 
 	contestList: ({ params }, cb, token) => {
-		console.log("🚀 ~ file: API.js ~ line 48 ~ contestList", params);
+		;
 		writeAtom(apiAtom.contestList, []);
 		api
 			.get("html_game/contests", params, token)
@@ -108,7 +133,8 @@ export default {
 			.catch((err) => console.log(err));
 	},
 	myHistory: ({ params }, cb, token) => {
-		console.log("🚀 ~ file: API.js ~ line 48 ~ contestList", params);
+		;
+		writeAtom(apiAtom.historyList, []);
 		// writeAtom(apiAtom.contestList, []);
 		api
 			.get("html_game/history", params, token)
@@ -126,7 +152,7 @@ export default {
 	},
 
 	gameDetail: ({ params, id }, cb, token) => {
-		console.log("🚀 ~ file: API.js ~ line 48 ~ contestList", params)
+
 		api
 			.get(`html_game/game-detail/${id}`, params, token)
 			.then((d) => {
@@ -134,6 +160,60 @@ export default {
 
 				if (d.status) {
 					writeAtom(apiAtom.gameDetail, d?.data);
+					return cb(d);
+				} else {
+					// return toast.error(d?.message)
+				}
+			})
+			.catch((err) => console.log(err));
+	},
+
+
+	contestDetail: ({ params, id }, cb, token) => {
+
+		api
+			.get(`html_game/contest-detail/${id}`, params, token)
+			.then((d) => {
+
+
+				if (d.status) {
+					writeAtom(apiAtom.contestDetail, d?.data);
+					return cb(d);
+				} else {
+					// return toast.error(d?.message)
+				}
+			})
+			.catch((err) => console.log(err));
+	},
+
+	megaLeaderboard: ({ params }, cb, token) => {
+		api
+			.get(`html_game/mega-leaderboard`, params, token)
+			.then((d) => {
+				if (d.status) {
+					writeAtom(apiAtom.megaLeaderboard, d?.data);
+					return cb(d);
+				} else {
+					// return toast.error(d?.message)
+				}
+			})
+			.catch((err) => console.log(err));
+	},
+	megaLeaderboardRanks: ({ params }, cb, token) => {
+		api
+			.get(`html_game/mega-leaderboard-ranks`, params, token)
+			.then((d) => {
+				if (d.status) {
+					writeAtom(apiAtom.megaLeaderboardRanks, d?.data);
+					let opt = readAtom(apiAtom.megaLeaderboardOpt)
+					writeAtom(apiAtom.megaLeaderboardOpt, {
+						...opt,
+						page: d.meta.current_page,
+						total_pages: d.meta.total_pages,
+						total_count: d.meta.total_count
+					})
+
+
 					return cb(d);
 				} else {
 					// return toast.error(d?.message)

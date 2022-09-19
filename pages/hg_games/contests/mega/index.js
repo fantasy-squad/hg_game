@@ -6,6 +6,11 @@ import Tab from '@material-ui/core/Tab';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import SwipeableViews from 'react-swipeable-views';
+import { useRouter } from 'next/router';
+import API from '../../../../src/api/services/API';
+import { useAtom } from 'jotai';
+import apiAtom from '../../../../src/jotai/apiAtom';
+import moment from 'moment';
 
 const styles = {
     tabs: {
@@ -32,17 +37,70 @@ const styles = {
 };
 
 function HgGames() {
-    const [index, setIndex] = useState((0))
+    const router = useRouter();
+
+    const [index, setIndex] = useState((0));
+    const [data, setData] = useAtom(apiAtom.contestDetail);
+    const [game, setGame] = useAtom(apiAtom.gameDetail);
+
+    const [ldb, setLdb] = useAtom(apiAtom.megaLeaderboard)
+    const [ldbRanks, setLdbRanks] = useAtom(apiAtom.megaLeaderboardRanks)
+    const [opt, setopt] = useAtom(apiAtom.megaLeaderboardOpt)
+
 
 
 
     const handleChange = (event, value) => {
         setIndex(value);
+        handleApiCall(value)
     };
 
     const handleChangeIndex = index => {
         setIndex(index);
+        handleApiCall(index)
     };
+
+    const handleApiCall = (index) => {
+        if (index == 1) {
+            let tkn = router?.query?.token;
+            let game_id = router?.query?.game_id;
+            let contest_id = router?.query?.contest_id;
+
+            if (!tkn || !game_id || !contest_id) return;
+            API.megaLeaderboard({
+                params: {
+                    game_id: game_id,
+                    contest_id: contest_id
+                }
+            }, () => { }, tkn)
+        }
+    }
+
+    useEffect(() => {
+        if (!router.isReady) return;
+        let tkn = router?.query?.token;
+        let game_id = router?.query?.game_id;
+        let contest_id = router?.query?.contest_id;
+
+        if (!tkn || !game_id || !contest_id) return;
+
+        API.contestDetail({ id: contest_id }, (d) => {
+
+            if (!Object.keys(game).length) {
+                API.gameDetail({ id: game_id }, (d) => {
+                }, tkn);
+            }
+
+
+        }, tkn);
+
+
+
+    }, [router.isReady])
+
+    const handleBack = () => {
+        router.back();
+    }
 
 
     return (
@@ -50,17 +108,17 @@ function HgGames() {
             <div className="mobileview">
                 <div className="mobile-header">
                     <div className="prize-heading">
-                        <div className="left-arrow">
+                        <div className="left-arrow" onClick={handleBack} >
                             <img src="/img/left-arrow.png" alt="" />
                         </div>
                         <div className="tournament">
                             <div className="tour-img">
-                                <img src="/img/pineapple.png" alt="" />
+                                <img src={game?.image || "/img/pineapple.png"} alt="" />
                             </div>
                         </div>
                         <div className='ph-3' >
                             <h6>Tournament</h6>
-                            <small>Knife Ninja</small>
+                            <small>{game?.name}</small>
                         </div>
                     </div>
                 </div>
@@ -75,7 +133,7 @@ function HgGames() {
                             <div className="grand-contest">
                                 <div className="grand-con">
                                     <div className="kniiif-img">
-                                        <img src="/img/contest-knif.png" alt="" />
+                                        <img src={game?.image || "/img/contest-knif.png"} alt="" />
                                     </div>
                                     <div className="grand-content">
                                         <div className="grand-star">
@@ -83,8 +141,12 @@ function HgGames() {
                                             <h6>GRAND CONTEST!</h6>
                                         </div>
                                         <div className="grand-prize">
-                                            <h5>₹1000</h5>
+                                            <h5>{`  ₹${`${data?.prize}`.includes('.00') ?
+                                                parseFloat(data?.prize || "0").toFixed(0) : data?.prize}`}</h5>
                                             <p>Make your highest score and win unreal cash<span> rewards T&C Apply!</span></p>
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -92,19 +154,19 @@ function HgGames() {
                                     <div className="play-content">
                                         <div className="play-user">
                                             <img src="/img/user.png" alt="" />
-                                            <p>703/1.5k  Players</p>
+                                            <p>{" "} {data?.total_teams}/{data?.group_teams}  Players</p>
                                         </div>
                                         <div className="play-user">
                                             <img src="/img/1st.png" alt="" className='mon' />
-                                            <p>₹80  Players</p>
+                                            <p>{" "} ₹{data?.prize_breakup?.length ? data?.prize_breakup[0]?.prize : ""}  </p>
                                         </div>
                                         <div className="play-user">
                                             <img src="/img/time.png" alt="" className='time' />
-                                            <p className='mon'>9:30pm, Aug31 - 9:30 pm, Sep 1</p>
+                                            <p className='mon'>{" "} {moment(data?.starting_at).format('HH:mm A, MMM DD') + " - " + moment(data?.ending_at).format('HH:mm A, MMM DD')}</p>
                                         </div>
                                     </div>
                                     <div className="play-btn">
-                                        {/* <button>Play ₹1</button> */}
+                                        {/* <button>Play ₹{`${`${data?.entry_fee}`.includes('.00') ? parseFloat(data?.entry_fee || '0').toFixed(0) : data?.entry_fee}`}</button> */}
                                     </div>
                                 </div>
                             </div>
@@ -115,15 +177,20 @@ function HgGames() {
                                     <p>Prize</p>
                                 </span>
                                 {
-                                    Array.from({ length: 4 }).map((d, i) => {
-                                        return (
-                                            <span className={`pb-row ${i % 2 === 0 ? "pb-even" : ""} `} >
-                                                <p>Rank</p>
-                                                <p>10</p>
-                                            </span>
-                                        )
-                                    })
+                                    data?.prize_breakup?.length ?
+
+                                        data?.prize_breakup?.map((p, i) => {
+                                            return (
+                                                <span className={`pb-row ${i % 2 === 0 ? "pb-even" : ""} `} >
+                                                    <p>{p?.from == p?.to ? p?.from : p?.from + " - " + p?.to}</p>
+                                                    <p>{`₹${`${p?.prize}`.includes('.00') ?
+                                                        parseFloat(p?.prize || "0").toFixed(0) : p?.prize}`}</p>
+                                                </span>
+                                            )
+                                        })
+                                        : ""
                                 }
+                                <br />
                             </div>
                         </div>
                         <div style={Object.assign({}, styles.slide, styles.slide2)}>

@@ -68,7 +68,9 @@ function HistoryCard({ d, i }) {
                             <h6>Battle</h6>
                         </div>
                         <div className="entry-fee">
-                            <h6>Entry Fee: <span>₹{d?.contest?.entry_fee}</span> </h6>
+                            <h6>Entry Fee: <span>₹{
+                                `${`${d?.contest?.entry_fee}`.includes('.00') ? parseFloat(d?.contest?.entry_fee || '0').toFixed(0) : d?.contest?.entry_fee}`
+                            }</span> </h6>
                         </div>
                     </div>
                     <div className="won">
@@ -78,7 +80,8 @@ function HistoryCard({ d, i }) {
                             <h5>{d?.oponents?.length ? d?.oponents[0]?.user?.username : ""}</h5>
                         </div>
                         <div className="won-money">
-                            <h5>{parseFloat(d?.member?.prize) > 0 ? `₹${d?.member?.prize}` : ""}</h5>
+                            <h5>{parseFloat(d?.member?.prize) > 0 ? `₹${`${d?.member?.prize}`.includes('.00') ?
+                                parseFloat(d?.member?.prize || "0").toFixed(0) : d?.member?.prize}` : ""}</h5>
                             <h6 style={{ color: (text == "LOSE" || text == "CANCELED") ? "red" : "" }} >{
                                 text
                             }</h6>
@@ -87,7 +90,7 @@ function HistoryCard({ d, i }) {
                     <hr className='hr' />
                     <div className="date-time">
                         <div className="date">
-                            <h6  >
+                            <h6>
                                 {moment(d?.member?.created_at).format("MMM DD, HH:mm A")}
                             </h6>
                         </div>
@@ -132,7 +135,8 @@ function HistoryCard({ d, i }) {
                                                         </td>
                                                         <td>
                                                             <div class="history-prize">
-                                                                <h6>₹{l?.prize}</h6>
+                                                                <h6>{`₹${`${l?.prize}`.includes('.00') ?
+                                                                    parseFloat(l?.prize || "0").toFixed(0) : l?.prize}`}</h6>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -146,9 +150,6 @@ function HistoryCard({ d, i }) {
 
                             {
                                 (moment(moment().format('YYYY-MM-DD HH:mm:ss')).diff(moment(d?.contest?.starting_at).add(d?.contest?.duration + 6, 'minutes').format('YYYY-MM-DD HH:mm:ss'), 'minutes') > 0 && d?.member?.status == "LIVE")
-
-
-
                                     ?
                                     < div className='hr-btn' >
 

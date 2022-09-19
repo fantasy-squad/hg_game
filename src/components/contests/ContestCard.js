@@ -211,7 +211,7 @@ function ContestCard({ d }) {
                             <h5>
 
                                 {
-                                    d?.type == "PAID" ?
+                                    d?.type == "PAID" || d?.type == "FREE" ?
                                         `WIN ₹${`${d?.prize}`.includes('.00') ?
                                             parseFloat(d?.prize || "0").toFixed(0) : d?.prize}` : d?.type
                                 }

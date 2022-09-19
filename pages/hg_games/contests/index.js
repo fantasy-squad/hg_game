@@ -368,7 +368,7 @@ function Contests() {
                             tab == "battle" ?
                                 (list.length ?
                                     list.map((d) => {
-                                        // if (!d?.is_mega) {
+                                        // if (d?.is_mega) {
                                         //     return <GrandContestCard d={d} key={d?.id} />
                                         // }
                                         return (
