@@ -68,8 +68,10 @@ function HistoryCard({ d, i }) {
                             <h6>Battle</h6>
                         </div>
                         <div className="entry-fee">
-                            <h6>Entry Fee: <span>₹{
-                                `${`${d?.contest?.entry_fee}`.includes('.00') ? parseFloat(d?.contest?.entry_fee || '0').toFixed(0) : d?.contest?.entry_fee}`
+                            <h6>Entry Fee: <span>{
+                                d?.contest?.type == "FREE" ? "FREE" :
+
+                                    "₹" + (`${`${d?.contest?.entry_fee}`.includes('.00') ? parseFloat(d?.contest?.entry_fee || '0').toFixed(0) : d?.contest?.entry_fee}`)
                             }</span> </h6>
                         </div>
                     </div>
