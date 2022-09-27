@@ -240,6 +240,27 @@ function HgGames() {
                                 }
                                 <br />
                             </div>
+                            <div className="rules-regulation prize-breakup">
+                                <div className="rules-content ">
+                                    <h4 className="rules">Tournament Rules : </h4>
+                                    <p>1. This is Grand Tournament. </p>
+                                    <p>
+                                        2. After registration , you will get 1 chance to make your
+                                        highest score in the game . If more chances are needed for
+                                        you to improve your high score , you can re - enter the
+                                        tournament and buy one more chance .
+                                    </p>
+
+                                    <p>
+                                        3. Place yourself on the leaderboard to win unreal cash
+                                        rewards . You can win up to ₹{data?.prize} 😱
+                                    </p>
+
+                                    <p>
+                                        4. Rewards are given only at the end of the tournament .
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <div style={Object.assign({}, styles.slide, styles.slide2)}>
                             <div className="leaderboard-rank">
