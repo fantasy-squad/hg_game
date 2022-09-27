@@ -6,7 +6,7 @@ import React from 'react'
 import API from '../../api/services/API'
 import apiAtom from '../../jotai/apiAtom'
 
-const GrandContestCard = ({ d }) => {
+const GrandContestCard = ({ d, text }) => {
     const router = useRouter();
 
     const [game, setGame] = useAtom(apiAtom.gameDetail);
@@ -28,6 +28,12 @@ const GrandContestCard = ({ d }) => {
         if (!tkn && !game_id) return;
 
         API.joinMega({ body: { contest_id: d?.id } }, (_d) => {
+
+            if (_d?.meta?.play) {
+                console.log("play found")
+                router.push(`${game?.url}?user_id=${_d?.data?.user_id}&group_id=${_d?.data?.id + "_grand"}&contest_id=${_d?.data?.hg_contest_id}&token=${tkn}&game_id=${game_id}&type=grand`);
+                return;
+            }
             router.push(`/hg_games/contests/mega?contest_id=${d?.id}&token=${tkn}&game_id=${game_id}`)
 
         }, tkn)
@@ -49,9 +55,13 @@ const GrandContestCard = ({ d }) => {
                             <h5>{`  ₹${`${d?.prize}`.includes('.00') ?
                                 parseFloat(d?.prize || "0").toFixed(0) : d?.prize}`}</h5>
                             <p>Make your highest score and win unreal cash<span> rewards T&C Apply!</span></p>
-                            <p className='gp-click' onClick={handleClick} >
-                                click here to know more
-                            </p>
+                            {
+                                text ?
+                                    <p className='gp-click' onClick={handleClick} >
+                                        click here to know more
+                                    </p>
+                                    : <></>
+                            }
 
 
                         </div>
@@ -73,7 +83,12 @@ const GrandContestCard = ({ d }) => {
                         </div>
                     </div>
                     <div className="play-btn">
-                        <button onClick={handleJoin} >Play ₹{`${`${d?.entry_fee}`.includes('.00') ? parseFloat(d?.entry_fee || '0').toFixed(0) : d?.entry_fee}`}</button>
+                        <button onClick={handleJoin} > {
+                            d?.duration <= 0 && d?.has_joined > 0 ?
+                                "PLAY" : d?.duration > 0 && d?.has_joined > 0 ? "JOINED" :
+                                    "Join ₹" + `${`${d?.entry_fee}`.includes('.00') ? parseFloat(d?.entry_fee || '0').toFixed(0) : d?.entry_fee}`
+                        }
+                        </button>
                     </div>
                 </div>
             </div>

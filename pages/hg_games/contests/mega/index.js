@@ -11,6 +11,8 @@ import API from '../../../../src/api/services/API';
 import { useAtom } from 'jotai';
 import apiAtom from '../../../../src/jotai/apiAtom';
 import moment from 'moment';
+import GrandContestCard from '../../../../src/components/contests/GrandContestCard';
+import { toast } from 'react-hot-toast';
 
 const styles = {
     tabs: {
@@ -67,10 +69,19 @@ function HgGames() {
             let contest_id = router?.query?.contest_id;
 
             if (!tkn || !game_id || !contest_id) return;
+
             API.megaLeaderboard({
                 params: {
                     game_id: game_id,
                     contest_id: contest_id
+                }
+            }, () => { }, tkn)
+
+            API.megaLeaderboardRanks({
+                params: {
+                    game_id: game_id,
+                    contest_id: contest_id,
+                    page: 0,
                 }
             }, () => { }, tkn)
         }
@@ -93,6 +104,42 @@ function HgGames() {
 
 
         }, tkn);
+
+
+
+
+    }, [router.isReady])
+
+    const [bottom, setBottom] = useState(100)
+
+    useEffect(() => {
+        if (!router.isReady) return;
+        let page = 0;
+        document.addEventListener('scroll', () => {
+            if (document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+                // Do something
+                let tkn = router?.query?.token;
+                let game_id = router?.query?.game_id;
+                let contest_id = router?.query?.contest_id;
+
+                // console.log(opt)
+                console.log(page)
+                // console.log(tkn, game_id, contest_id)
+                if (!tkn || !game_id || !contest_id) return;
+
+                page = page + 1
+
+                API.megaLeaderboardRanks({
+                    params: {
+                        game_id: game_id,
+                        contest_id: contest_id,
+                        page: page,
+                    }
+                }, () => { }, tkn)
+
+            }
+        })
+
 
 
 
@@ -129,8 +176,9 @@ function HgGames() {
                     </Tabs>
                     <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
                         <div style={Object.assign({}, styles.slide, styles.slide1)}>
+                            <GrandContestCard d={data} />
 
-                            <div className="grand-contest">
+                            {/* <div className="grand-contest">
                                 <div className="grand-con">
                                     <div className="kniiif-img">
                                         <img src={game?.image || "/img/contest-knif.png"} alt="" />
@@ -166,10 +214,10 @@ function HgGames() {
                                         </div>
                                     </div>
                                     <div className="play-btn">
-                                        {/* <button>Play ₹{`${`${data?.entry_fee}`.includes('.00') ? parseFloat(data?.entry_fee || '0').toFixed(0) : data?.entry_fee}`}</button> */}
+
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="prize-breakup" >
                                 <span className='pb-head' >
@@ -197,26 +245,26 @@ function HgGames() {
                             <div className="leaderboard-rank">
                                 <div className="rank-list">
                                     <div className="first-rank">
-                                        <h5>2</h5>
-                                        <img src="/img/thor-2.png" alt="" className='rank-dp' />
-                                        <h6 className='points'>10</h6>
-                                        <h6 className='name-win'>Thor</h6>
+                                        <h5>{ldb?.second?.rank}</h5>
+                                        <img src={ldb?.second?.user?.photo || "/img/thor-2.png"} alt="" className='rank-dp' />
+                                        <h6 className='points'>{ldb?.second?.total_points}</h6>
+                                        <h6 className='name-win'>{ldb?.second?.user?.username}</h6>
                                     </div>
                                 </div>
                                 <div className="rank-list">
                                     <div className="first-rank">
                                         <img src="/img/crown.png" alt="" className='crown' />
-                                        <img src="/img/piter.png" alt="" className='firstrank-dp' />
-                                        <h6 className='points'>20</h6>
-                                        <h6 className='name-win'>Piter</h6>
+                                        <img src={ldb?.first?.user?.photo || "/img/piter.png"} alt="" className='firstrank-dp' />
+                                        <h6 className='points'>{ldb?.first?.total_points}</h6>
+                                        <h6 className='name-win'>{ldb?.first?.user?.username}</h6>
                                     </div>
                                 </div>
                                 <div className="rank-list">
                                     <div className="first-rank">
-                                        <h5>3</h5>
-                                        <img src="/img/wanda.png" alt="" className='rank-dp' />
-                                        <h6 className='points'>15</h6>
-                                        <h6 className='name-win'> Wanda</h6>
+                                        <h5>{ldb?.third?.rank}</h5>
+                                        <img src={ldb?.third?.user?.photo || "/img/wanda.png"} alt="" className='rank-dp' />
+                                        <h6 className='points'>{ldb?.third?.total_points}</h6>
+                                        <h6 className='name-win'> {ldb?.third?.user?.username}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -236,39 +284,41 @@ function HgGames() {
                                                 <img src="/img/captain.png" alt="" className='team-dp' />
                                             </div>
                                             <div className="tename">
-                                                <h5>Teamname</h5>
-                                                <h6>1400</h6>
+                                                <h5>{ldb?.my_leaderboard?.user?.username}</h5>
+                                                <h6>{ldb?.my_leaderboard?.total_points}</h6>
                                             </div>
                                         </div>
                                     </span>
                                     <span className='tb-r' >
-                                        <h5 className='rankt'>#15</h5>
+                                        <h5 className='rankt'>{ldb?.my_leaderboard?.rank}</h5>
                                     </span>
 
                                 </div>
 
                                 {
-                                    Array.from({ length: 3 }).map((d) => {
-                                        return (
-                                            <div className='team-bg'>
-                                                <span className='tb-l' >
-                                                    <div className="teamane-main">
-                                                        <div className="team-img">
-                                                            <img src="/img/captain.png" alt="" className='team-dp' />
-                                                        </div>
-                                                        <div className="tename">
-                                                            <h5>Teamname</h5>
-                                                            <h6>1400 Points</h6>
-                                                        </div>
-                                                    </div>
-                                                </span>
-                                                <span className='tb-r' >
-                                                    <h5 className='rankt'>#15</h5>
-                                                </span>
+                                    ldbRanks?.length ?
 
-                                            </div>
-                                        )
-                                    })
+                                        ldbRanks?.map((d) => {
+                                            return (
+                                                <div className='team-bg'>
+                                                    <span className='tb-l' >
+                                                        <div className="teamane-main">
+                                                            <div className="team-img">
+                                                                <img src="/img/captain.png" alt="" className='team-dp' />
+                                                            </div>
+                                                            <div className="tename">
+                                                                <h5>{d?.user?.username}</h5>
+                                                                <h6>{d?.total_points} Points</h6>
+                                                            </div>
+                                                        </div>
+                                                    </span>
+                                                    <span className='tb-r' >
+                                                        <h5 className='rankt'>{d?.rank}</h5>
+                                                    </span>
+
+                                                </div>
+                                            )
+                                        }) : <></>
                                 }
 
                             </div>

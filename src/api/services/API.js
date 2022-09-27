@@ -200,12 +200,20 @@ export default {
 			.catch((err) => console.log(err));
 	},
 	megaLeaderboardRanks: ({ params }, cb, token) => {
+		let list = readAtom(apiAtom.megaLeaderboardRanks)
+		let opt = readAtom(apiAtom.megaLeaderboardOpt)
+
+		if (list?.length == opt.total_count && opt.page > 0) return;
+
+
+
 		api
 			.get(`html_game/mega-leaderboard-ranks`, params, token)
 			.then((d) => {
 				if (d.status) {
-					writeAtom(apiAtom.megaLeaderboardRanks, d?.data);
-					let opt = readAtom(apiAtom.megaLeaderboardOpt)
+
+					writeAtom(apiAtom.megaLeaderboardRanks, [...list, ...d?.data]);
+
 					writeAtom(apiAtom.megaLeaderboardOpt, {
 						...opt,
 						page: d.meta.current_page,
