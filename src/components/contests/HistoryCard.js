@@ -61,6 +61,15 @@ function HistoryCard({ d, i }) {
     return (
         <>
             <div className="history-content"  >
+                {
+                    (moment(moment().format('YYYY-MM-DD HH:mm:ss')).diff(moment(d?.contest?.starting_at).add(d?.contest?.duration + 3, 'minutes').format('YYYY-MM-DD HH:mm:ss'), 'minutes') > 0 && d?.member?.status == "LIVE")
+                        ?
+                        < div className='hr-btn' >
+
+                            <button onClick={fetchRank} >Fetch Rank</button>
+                        </div>
+                        : ""
+                }
                 <div className="history-main" onClick={handleOpen} >
                     <div className="battle-main">
                         <div className="battle">
