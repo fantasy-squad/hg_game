@@ -213,7 +213,9 @@ function ContestCard({ d }) {
                                 {
                                     d?.type == "PAID" || d?.type == "FREE" ?
                                         `WIN ₹${`${d?.prize}`.includes('.00') ?
-                                            parseFloat(d?.prize || "0").toFixed(0) : d?.prize}` : d?.type
+                                            d?.total_teams > 0 ?
+                                                (parseFloat(d?.prize || "0") * d?.total_teams).toFixed(0) :
+                                                parseFloat(d?.prize || "0").toFixed(0) : d?.total_teams > 0 ? (parseFloat(d?.prize || "0") * d?.total_teams) : d?.prize}` : d?.type
                                 }
                             </h5>
                         </div>
@@ -242,10 +244,8 @@ function ContestCard({ d }) {
 
                             <div className="awad">
                                 <img src="/img/user.png" width={20} />
-
-
                                 <FlipNumbers height={16} width={10} numberStyle={{ fontWeight: "bold", margin: 0 }} perspective={1000} color="black" background="white" play numbers={`${joined > 0 ? joined : d?.total_teams}`} />
-                                <p>{"   JOINED"}</p>
+                                <p>{"JOINED"}</p>
                             </div>
 
                             {/* <div className="awad">
