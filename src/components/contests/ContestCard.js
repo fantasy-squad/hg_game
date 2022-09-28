@@ -215,7 +215,7 @@ function ContestCard({ d }) {
                                         `WIN ₹${`${d?.prize}`.includes('.00') ?
                                             d?.total_teams > 0 ?
                                                 (parseFloat(d?.prize || "0") * d?.total_teams).toFixed(0) :
-                                                parseFloat(d?.prize || "0").toFixed(0) : d?.total_teams > 0 ? (parseFloat(d?.prize || "0") * d?.total_teams) : d?.prize}` : d?.type
+                                                parseFloat(d?.prize || "0").toFixed(0) : d?.total_teams > 0 ? (parseFloat(d?.prize || "0") * d?.total_teams).toFixed(0) : d?.prize}` : d?.type
                                 }
                             </h5>
                         </div>
