@@ -200,6 +200,9 @@ function Contests() {
 
         })
     }
+    const handleBack = () => {
+        router.back();
+    }
 
     return (
         <>
@@ -208,7 +211,9 @@ function Contests() {
 
             <div className="mobileview">
                 <div className="mobile-header">
-                    <i className="fa-solid fa-arrow-left" />
+                    <div className="left-arrow" onClick={handleBack} >
+                        <img src="/img/left-arrow.png" alt="" />
+                    </div>
                     {
                         game?.image
                             ?
