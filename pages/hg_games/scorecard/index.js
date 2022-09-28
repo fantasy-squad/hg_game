@@ -189,7 +189,7 @@ function ScoreCard() {
                     {
                         seconds > 1 ?
                             <pre>
-                                <span className='text-red' >Please Wait, Other Player Might Playing Game.</span>
+                                <span className='text-red'>Please Wait, Other Player Might Playing Game.</span>
                                 {" \n Fetching Your Rank In..."} {seconds} Seconds </pre>
                             : <> <h5>Your Rank</h5>
                                 <h4>{data?.user?.rank}</h4></>

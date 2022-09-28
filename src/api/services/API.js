@@ -114,6 +114,32 @@ export default {
 			.catch((err) => err(err));
 	},
 
+	getMegaScore: ({ body, params }, cb, token, err = () => { }) => {
+		const schema = Joi.object({
+			contest_id: Joi.number().required(),
+			user_id: Joi.string().required(),
+			group_id: Joi.string().required(),
+		}).validate(body);
+
+		if (schema.error) {
+			return toast.error(schema.error.message);
+		}
+
+		api
+			.post("html_game/mega-result", body, params, token)
+			.then((d) => {
+				if (d.status) {
+					writeAtom(apiAtom.myScore, d.data)
+					return cb(d.data);
+				} else {
+					console.log("error message")
+					toast.error(d.message);
+					return err();
+				}
+			})
+			.catch((err) => err(err));
+	},
+
 
 	contestList: ({ params }, cb, token) => {
 		;
