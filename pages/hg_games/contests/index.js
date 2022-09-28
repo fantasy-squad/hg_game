@@ -201,7 +201,7 @@ function Contests() {
         })
     }
     const handleBack = () => {
-        router.back();
+        window.close();
     }
 
     return (
