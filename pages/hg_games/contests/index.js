@@ -216,9 +216,9 @@ function Contests() {
 
             <div className="mobileview">
                 <div className="mobile-header">
-                    <div className="left-arrow" onClick={handleBack} >
+                    {/* <div className="left-arrow" onClick={handleBack} >
                         <img src="/img/left-arrow.png" alt="" />
-                    </div>
+                    </div> */}
                     {
                         game?.image
                             ?
