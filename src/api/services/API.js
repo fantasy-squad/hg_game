@@ -151,7 +151,7 @@ export default {
 
 				if (d.status) {
 					writeAtom(apiAtom.contestList, d?.data?.sort((a, b) => {
-						return parseInt(a.is_mega) - parseInt(b.is_mega)
+						return parseInt(b.is_mega) - parseInt(a.is_mega)
 					}));
 					return cb(d);
 				} else {
