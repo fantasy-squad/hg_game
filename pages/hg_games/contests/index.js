@@ -334,7 +334,7 @@ function Contests() {
 
                 <div className="mobile-main">
                     <div className="affiliate-main">
-                        {tab == "battle" ? <PracticeCard /> : <></>}
+                        {/* {tab == "battle" ? <PracticeCard /> : <></>} */}
 
                         {/* <div className="grand-contest">
                             <div className="grand-con">
