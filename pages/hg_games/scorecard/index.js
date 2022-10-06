@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import API from '../../../src/api/services/API';
 import apiAtom from '../../../src/jotai/apiAtom';
+import { useWindowSize } from 'react-use';
+import Confetti from 'react-confetti'
 
 function ScoreCard() {
 
@@ -10,6 +12,7 @@ function ScoreCard() {
     const [seconds, setSeconds] = useState(30);
     const [data, setData] = useAtom(apiAtom.myScore)
     const [game, setGame] = useAtom(apiAtom.gameDetail)
+    const { width, height } = useWindowSize()
 
 
 
@@ -184,6 +187,15 @@ function ScoreCard() {
                     <img src="/img/feather-info.png"  class="info" /> */}
                 </div>
             </div>
+
+            {
+                parseInt(data?.user?.rank) == 1 ?
+                    <Confetti
+                        width={width}
+                        height={height}
+                    />
+                    : <></>
+            }
             <div class="rank">
                 <div class="your-rank">
                     {

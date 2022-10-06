@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 import SwipeableViews from 'react-swipeable-views';
 import { useRouter } from 'next/router';
 import API from '../../../../src/api/services/API';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import apiAtom from '../../../../src/jotai/apiAtom';
 import moment from 'moment';
 import GrandContestCard from '../../../../src/components/contests/GrandContestCard';
@@ -48,6 +48,7 @@ function HgGames() {
     const [ldb, setLdb] = useAtom(apiAtom.megaLeaderboard)
     const [ldbRanks, setLdbRanks] = useAtom(apiAtom.megaLeaderboardRanks)
     const [opt, setopt] = useAtom(apiAtom.megaLeaderboardOpt)
+    const user = useAtomValue(apiAtom.user)
 
 
 
@@ -305,7 +306,7 @@ function HgGames() {
                                                 <img src="/img/captain.png" alt="" className='team-dp' />
                                             </div>
                                             <div className="tename">
-                                                <h5>{ldb?.my_leaderboard?.user?.username}</h5>
+                                                <h5>{ldb?.my_leaderboard?.user?.username || user?.username}</h5>
                                                 <h6>{ldb?.my_leaderboard?.total_points}</h6>
                                             </div>
                                         </div>

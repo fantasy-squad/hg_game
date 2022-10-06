@@ -24,7 +24,7 @@ function Contests() {
     useEffect(() => {
         if (attempt < 1) {
             if (isKeyboardOpen) {
-                toast("Full Screen Mode ")
+                // toast("Full Screen Mode ")
                 setAttempt(p => p + 1)
             }
         }
@@ -51,6 +51,15 @@ function Contests() {
 
         let tkn = router?.query?.token;
         let game_id = router?.query?.game_id;
+        let is_mini = router?.query?.type == "mini";
+
+        API.gameDetail({ id: game_id }, (d) => {
+            API.Socket(s => {
+                s.emit('join-chat', { game_id })
+            })
+        }, tkn);
+
+        if (is_mini) return;
 
 
         if (!tkn || !game_id) return;
@@ -60,11 +69,7 @@ function Contests() {
 
         }, tkn);
 
-        API.gameDetail({ id: game_id }, (d) => {
-            API.Socket(s => {
-                s.emit('join-chat', { game_id })
-            })
-        }, tkn);
+
 
         API.me({}, (d) => {
 

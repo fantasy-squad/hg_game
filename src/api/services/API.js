@@ -118,7 +118,7 @@ export default {
 		const schema = Joi.object({
 			contest_id: Joi.number().required(),
 			user_id: Joi.string().required(),
-			group_id: Joi.string().required(),
+			game_id: Joi.string().required(),
 		}).validate(body);
 
 		if (schema.error) {
@@ -129,7 +129,7 @@ export default {
 			.post("html_game/mega-result", body, params, token)
 			.then((d) => {
 				if (d.status) {
-					writeAtom(apiAtom.myScore, d.data)
+					writeAtom(apiAtom.myMegaScore, d.data)
 					return cb(d.data);
 				} else {
 					console.log("error message")
@@ -238,7 +238,14 @@ export default {
 			.then((d) => {
 				if (d.status) {
 
-					writeAtom(apiAtom.megaLeaderboardRanks, [...list, ...d?.data]);
+					if (params?.page == 0) {
+						writeAtom(apiAtom.megaLeaderboardRanks, d?.data);
+
+					} else {
+
+
+						writeAtom(apiAtom.megaLeaderboardRanks, [...list, ...d?.data]);
+					}
 
 					writeAtom(apiAtom.megaLeaderboardOpt, {
 						...opt,

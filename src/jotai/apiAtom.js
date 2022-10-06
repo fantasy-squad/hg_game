@@ -7,6 +7,7 @@ export default {
     historyList: atom([]),
     myGroup: atom({}),
     myScore: atom({}),
+    myMegaScore: atom({}),
     socket: atom(null),
     gameDetail: atom({}),
     contestDetail: atom({}),
