@@ -377,13 +377,24 @@ function Contests() {
                         {
                             tab == "battle" ?
                                 (list.length ?
-                                    list.map((d) => {
-                                        if (d?.is_mega) {
-                                            return <GrandContestCard d={d} key={d?.id} text="Click here to know more" />
+                                    list.map((d, i) => {
+                                        if (d?.is_mega && i == 0) {
+                                            return <>
+                                                <GrandContestCard d={d} key={d?.id} text="Click here to know more" />
+                                                <PracticeCard />
+                                            </>
                                         }
                                         return (
 
-                                            <ContestCard d={d} key={d?.id} />
+                                            (!d?.is_mega && i == 0) ?
+                                                <>
+                                                    <PracticeCard />
+                                                    <ContestCard d={d} key={d?.id} />
+                                                </>
+                                                : <>
+                                                    <ContestCard d={d} key={d?.id} />
+                                                </>
+
 
 
 

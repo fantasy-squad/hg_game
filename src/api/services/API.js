@@ -150,9 +150,9 @@ export default {
 				console.log("🚀 ~ file: API.js ~ line 51 ~ .then ~ d", d)
 
 				if (d.status) {
-					writeAtom(apiAtom.contestList, d?.data?.sort((a, b) => {
-						return parseInt(b.is_mega) - parseInt(a.is_mega)
-					}));
+					let mega = d?.data?.filter(f => f.is_mega == 1)
+					let others = d?.data?.filter(f => f.is_mega != 1)
+					writeAtom(apiAtom.contestList, [...mega, ...others]);
 					return cb(d);
 				} else {
 					return toast.error(d?.message)
