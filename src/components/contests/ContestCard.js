@@ -213,7 +213,7 @@ function ContestCard({ d }) {
                                 {
                                     d?.type == "PAID" || d?.type == "FREE" ?
                                         `WIN ₹${`${d?.prize}`.includes('.00') ?
-                                            parseFloat((parseFloat(d?.prize || "0") * d?.total_teams) / 2).toFixed(0) : parseFloat((parseFloat(d?.prize) * d?.total_teams) / 2).toFixed(2)}` : d?.type
+                                            parseFloat((parseFloat(d?.prize || "0") * (d?.total_teams || 2)) / 2).toFixed(0) : parseFloat((parseFloat(d?.prize) * (d?.total_teams || 2)) / 2).toFixed(2)}` : d?.type
                                 }
                             </h5>
                         </div>
@@ -228,7 +228,7 @@ function ContestCard({ d }) {
                     </div>
                     <div className="user">
                         <div className="pp">
-                            <h5 style={{ fontSize: "14px" }} >{d?.group_teams} {d?.group_teams > 1 ? "Players" : "Player"}</h5>
+                            <h5 style={{ fontSize: "14px" }} >{d?.group_teams} {d?.group_teams > 1 ? " Players" : " Player"}</h5>
                         </div>
                         {
                             parseFloat(d?.bonus || "0") > 0 ?
