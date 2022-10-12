@@ -1411,11 +1411,12 @@ lines {
 .contest-loading-main{
 	width: 100vw;
 	display: flex;align-items: center;justify-content: center;
+	min-height: 160px;
 }
 .contest-loading{
 	width: 90%;
+	height: 100%;
 	margin:auto;
-	min-height: 160px;
 }
 .kniiif-img {
 	img {
