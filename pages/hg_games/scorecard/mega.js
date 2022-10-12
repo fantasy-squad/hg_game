@@ -195,7 +195,8 @@ function ScoreCard() {
                 <div class="prize-main">
                     {
                         parseInt(data?.rank) > 1 ?
-                            <p style={{ color: 'white' }} >Play again to add more score to win the 1<small>st</small> prize. </p> : <p style={{ color: 'white' }} >Congratulations 🏆 you are the First Ranker 🥳 </p>
+                            <p style={{ color: 'white' }} >Play again to add more score to win the 1<small>st</small> prize. </p> : parseInt(data?.rank) == 1 ? <p style={{ color: 'white' }} >Congratulations 🏆 you are the First Ranker 🥳 </p>
+                                : <></>
                     }
                 </div>
                 {
