@@ -59,7 +59,7 @@ function PracticeCard({ d }) {
                     </div>
                     <div className="user">
                         <div className="pp">
-                            <h5 style={{ fontSize: "14px" }} >{1}P</h5>
+                            <h5 style={{ fontSize: "14px" }} >{1}Player</h5>
                         </div>
 
                         {/* <div className="user-id">

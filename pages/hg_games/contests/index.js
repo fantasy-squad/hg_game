@@ -399,7 +399,16 @@ function Contests() {
 
 
                                         );
-                                    }) : "") : tab == "history" ?
+                                    }) : [1, 2, 3, 4].map((d) => {
+                                        return (
+                                            <div className='contest-loading-main' >
+
+                                                <div className="grand-contest shine contest-loading">
+
+                                                </div>
+                                            </div>
+                                        )
+                                    })) : tab == "history" ?
                                     (
                                         history.length ?
                                             history.map((d, i) => {

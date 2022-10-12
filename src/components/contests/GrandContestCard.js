@@ -58,7 +58,7 @@ const GrandContestCard = ({ d, text }) => {
                             {
                                 text ?
                                     <p className='gp-click' onClick={handleClick} >
-                                        click here to know more
+                                        Click Here To Know More
                                     </p>
                                     : <></>
                             }

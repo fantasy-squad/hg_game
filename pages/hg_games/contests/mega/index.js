@@ -177,7 +177,17 @@ function HgGames() {
                     </Tabs>
                     <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
                         <div style={Object.assign({}, styles.slide, styles.slide1)}>
-                            <GrandContestCard d={data} />
+                            {
+                                Object.keys(data || {}).length ?
+
+                                    <GrandContestCard d={data} />
+                                    : <div className='contest-loading-main' >
+
+                                        <div className="grand-contest shine contest-loading">
+
+                                        </div>
+                                    </div>
+                            }
 
                             {/* <div className="grand-contest">
                                 <div className="grand-con">
@@ -226,9 +236,9 @@ function HgGames() {
                                     <p>Prize</p>
                                 </span>
                                 {
-                                    data?.prize_breakup?.length ?
 
-                                        data?.prize_breakup?.map((p, i) => {
+                                    data?.is_dynamic && (data?.new_prize_breakup || []).length ?
+                                        data?.new_prize_breakup?.map((p, i) => {
                                             return (
                                                 <span className={`pb-row ${i % 2 === 0 ? "pb-even" : ""} `} >
                                                     <p>{p?.from == p?.to ? p?.from : p?.from + " - " + p?.to}</p>
@@ -236,8 +246,20 @@ function HgGames() {
                                                         parseFloat(p?.prize || "0").toFixed(0) : p?.prize}`}</p>
                                                 </span>
                                             )
-                                        })
-                                        : ""
+                                        }) :
+
+                                        data?.prize_breakup?.length ?
+
+                                            data?.prize_breakup?.map((p, i) => {
+                                                return (
+                                                    <span className={`pb-row ${i % 2 === 0 ? "pb-even" : ""} `} >
+                                                        <p>{p?.from == p?.to ? p?.from : p?.from + " - " + p?.to}</p>
+                                                        <p>{`₹${`${p?.prize}`.includes('.00') ?
+                                                            parseFloat(p?.prize || "0").toFixed(0) : p?.prize}`}</p>
+                                                    </span>
+                                                )
+                                            })
+                                            : ""
                                 }
                                 <br />
                             </div>
@@ -260,6 +282,18 @@ function HgGames() {
                                     <p>
                                         4. Rewards are given only at the end of the tournament .
                                     </p>
+
+                                    {
+                                        data?.is_dynamic && data?.dynamic_min_team ?
+
+
+                                            <p>
+
+                                                5. Contest will get Confirmed if more than {data?.dynamic_min_team} teams joined and prizes are calculated according slots filled otherwise contest will be get cancelled
+
+                                            </p>
+                                            : <></>
+                                    }
                                 </div>
                             </div>
                         </div>
