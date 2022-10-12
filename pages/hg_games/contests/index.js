@@ -401,12 +401,64 @@ function Contests() {
                                         );
                                     }) : [1, 2, 3, 4].map((d) => {
                                         return (
-                                            <div className='contest-loading-main' >
+                                            <>
+                                                <div className='contest-card ' >
+                                                    <div className="affliliate-card shimmer">
+                                                        <div className="heading haesding2">
+                                                            <div className="battle">
+                                                                {/* <img src="/img/battle.png" /> */}
+                                                                <br />
+                                                                <br />
 
-                                                <div className="grand-contest shine contest-loading">
+                                                                <h5></h5>
+                                                            </div>
+                                                            <div className="fee">
+                                                                {/* <p>Entry Fee</p> */}
+                                                            </div>
+                                                        </div>
+                                                        <div className="heading">
+                                                            <div className="part">
+                                                                <h5>
+                                                                    {
+                                                                        ""
+                                                                    }
+                                                                </h5>
+                                                            </div>
+                                                            <p className='ccrd-time' >
 
+                                                            </p>
+                                                            <div className="free">
+                                                                <button style={{ opacity: 0 }}  >{
+                                                                    ""
+                                                                }</button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="user">
+                                                            <div className="pp">
+                                                                {/* <h5 style={{ fontSize: "14px" }} ></h5> */}
+                                                            </div>
+
+                                                            {/* <div className="user-id">
+
+                            <div className="awad">
+                                <img src="/img/user.png" width={20} />
+
+                            </div>
+
+                            <div className="awad">
+                                <img src="/img/winning.jpeg" width={15} />
+                                <h6> ₹ {d?.prize} </h6>
+                            </div>
+                            <div className="awad">
+                                <img src="/img/award.png"  />
+                                <h6>1</h6>
+                            </div>
+                        </div> */}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <br />
+                                            </>
                                         )
                                     })) : tab == "history" ?
                                     (
