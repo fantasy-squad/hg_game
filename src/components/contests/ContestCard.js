@@ -220,7 +220,7 @@ function ContestCard({ d }) {
                 }
             }
 
-            return "WIN " + f
+            return "WIN ₹" + f
 
         } else {
             return type;
