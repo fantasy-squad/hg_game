@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast';
 import API from '../../../src/api/services/API';
 import apiAtom from '../../../src/jotai/apiAtom';
@@ -45,6 +45,9 @@ function Contests() {
 
     const [loading, setLoading] = useState(true)
 
+    const bottomRef = useRef(null);
+
+
 
 
     useEffect(() => {
@@ -57,11 +60,14 @@ function Contests() {
 
         API.gameDetail({ id: game_id }, (d) => {
             API.Socket(s => {
-                s.emit('join-chat', { game_id })
+                s.emit('join-chat', { game_id: "1" })
             })
         }, tkn);
 
-        if (is_mini) return;
+        if (is_mini) {
+            setLoading(false)
+            return;
+        };
 
 
         if (!tkn || !game_id) return;
@@ -81,7 +87,7 @@ function Contests() {
 
         API.Socket(s => {
             s.on('receive-chat', (d) => {
-
+                scrollToBottom()
                 setChat(p => [...p, d])
                 setNewMsg(d)
                 setTimeout(() => {
@@ -91,14 +97,14 @@ function Contests() {
             })
 
             s.on('user-typing', (d) => {
-
+                scrollToBottom()
                 setType(d)
 
             })
 
 
             s.on('user-no-longer-typing', (d) => {
-
+                scrollToBottom()
                 setType(null)
 
             })
@@ -117,7 +123,7 @@ function Contests() {
         setTab(t);
 
         let tkn = router?.query?.token;
-        let game_id = router?.query?.game_id;
+        let game_id = "1";
 
 
         if (!tkn || !game_id) return;
@@ -142,17 +148,19 @@ function Contests() {
         if (!msg) {
             return;
         }
+        scrollToBottom()
         API.Socket(s => {
             let chat_data = {
-                game_id: router?.query?.game_id,
+                game_id: "1",
                 chat: msg || "Hello test chat",
                 user: {
                     id: user?.id,
                     photo: user?.photo,
                     name: user?.username,
+                    role: user?.role,
                 }
             }
-
+            s.emit('user-stopped', chat_data)
             s.emit('send-chat', chat_data)
             setChat(p => [...p, { ...chat_data, mine: true }])
             setMsg('')
@@ -170,7 +178,7 @@ function Contests() {
         API.Socket(s => {
 
             let chat_data = {
-                game_id: router?.query?.game_id,
+                game_id: "1",
                 user: {
                     id: user?.id,
                     photo: user?.photo,
@@ -178,6 +186,7 @@ function Contests() {
                     role: user?.role,
                 }
             }
+            scrollToBottom()
             s.emit('user-typed', chat_data)
 
 
@@ -195,13 +204,14 @@ function Contests() {
 
     const userNoLongertyping = () => {
         API.Socket(s => {
-
+            scrollToBottom()
             s.emit('user-stopped', {
-                game_id: router?.query?.game_id,
+                game_id: "1",
                 user: {
                     id: user?.id,
                     photo: user?.photo,
                     name: user?.username,
+                    role: user?.role,
                 }
             })
 
@@ -209,6 +219,11 @@ function Contests() {
     }
     const handleBack = () => {
         window.close();
+    }
+
+    const scrollToBottom = () => {
+        bottomRef?.current?.scrollIntoView({ behavior: 'smooth' });
+
     }
 
     return (
@@ -257,9 +272,9 @@ function Contests() {
                                 <div class="chats">
                                     {
                                         chat?.length ?
-                                            chat?.map(c => {
+                                            chat?.map((c, i) => {
                                                 return (
-                                                    <li class={c?.mine ? "self" : "other"}>
+                                                    <li class={c?.mine ? "self" : "other"} ref={i == (chat?.length - 1) ? bottomRef : null} >
                                                         <div class="avatar">
                                                             <img src={c?.user?.photo || "https://i.imgur.com/HYcn9xO.png"} draggable="false" />
                                                         </div>
@@ -294,6 +309,7 @@ function Contests() {
                                             : ""
                                     }
 
+                                    <div ref={bottomRef} />
 
 
 

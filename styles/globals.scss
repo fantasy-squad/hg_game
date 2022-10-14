@@ -478,6 +478,12 @@ body {
 	font-weight: 900;
 	padding: 8px 23px;
 }
+
+@keyframes ssdjlkjkhine {
+	100% {
+		left: 200%;
+	}
+}
 .battle h5 {
 	margin: 0;
 	font-size: 18px;
@@ -812,7 +818,6 @@ body {
 	animation-name: placeholderShimmer;
 	animation-timing-function: linear;
 }
-
 
 .shimmer {
 	background: #f6f7f8;
@@ -1430,15 +1435,17 @@ lines {
 	background-color: #fff;
 	box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
 }
-.contest-loading-main{
+.contest-loading-main {
 	width: 100vw;
-	display: flex;align-items: center;justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.contest-loading{
+.contest-loading {
 	width: 90%;
 	min-height: 200px;
 	height: 100%;
-	margin:auto;
+	margin: auto;
 }
 .kniiif-img {
 	img {
@@ -1764,8 +1771,11 @@ ol.chat {
 	border-radius: 10px 10px 0px 10px;
 	box-shadow: 1px 2px 0px #d4d4d4;
 }
+
 .self .avatar {
 	order: 2;
+	display: flex;
+	flex-direction: row-reverse;
 }
 
 .msg {

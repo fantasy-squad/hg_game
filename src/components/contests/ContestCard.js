@@ -193,6 +193,42 @@ function ContestCard({ d }) {
         }, tkn)
     }
 
+    const show_winning = () => {
+        let p = parseFloat(d?.prize || 0);
+        let t = parseFloat(d?.total_teams || 2);
+        let type = d?.type;
+
+        let f;
+
+        if (type == "PAID" || type == "FREE") {
+
+
+
+            if (t % 2 === 0 && t != 0) {
+                f = (p * t) / 2;
+                if (`${f}`.includes('.00')) {
+                    f = (f).toFixed(0)
+                } else {
+                    f = (f).toFixed(2)
+                }
+            } else {
+                f = p
+                if (`${p}`.includes('.00')) {
+                    f = (p).toFixed(0)
+                } else {
+                    f = (p).toFixed(2)
+                }
+            }
+
+            return "WIN " + f
+
+        } else {
+            return type;
+        }
+
+
+    }
+
     return (
         <>
             <div className={`contest-card`} ref={ref} >
@@ -211,9 +247,7 @@ function ContestCard({ d }) {
                             <h5>
 
                                 {
-                                    d?.type == "PAID" || d?.type == "FREE" ?
-                                        `WIN ₹${`${d?.prize}`.includes('.00') ?
-                                            parseFloat((parseFloat(d?.prize || "0") * (d?.total_teams || 2)) / 2).toFixed(0) : parseFloat((parseFloat(d?.prize) * (d?.total_teams || 2)) / 2).toFixed(2)}` : d?.type
+                                    show_winning()
                                 }
                             </h5>
                         </div>
