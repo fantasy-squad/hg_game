@@ -204,7 +204,7 @@ function ContestCard({ d }) {
 
 
 
-            if (t % 2 === 0 && t != 0) {
+            if (t % 2 === 0 && t > 2) {
                 f = (p * t) / 2;
                 if (`${f}`.includes('.00')) {
                     f = (f).toFixed(0)
