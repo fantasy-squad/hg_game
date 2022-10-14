@@ -43,6 +43,8 @@ function Contests() {
 
     const [show, setShow] = useState(false)
 
+    const [loading, setLoading] = useState(true)
+
 
 
     useEffect(() => {
@@ -65,7 +67,7 @@ function Contests() {
         if (!tkn || !game_id) return;
 
         API.contestList({ params: { game_id: game_id } }, (d) => {
-
+            setLoading(false)
 
         }, tkn);
 
@@ -399,7 +401,7 @@ function Contests() {
 
 
                                         );
-                                    }) : [1, 2, 3, 4].map((d) => {
+                                    }) : loading ? [1, 2, 3, 4].map((d) => {
                                         return (
                                             <>
                                                 <div className='contest-card ' >
@@ -460,7 +462,7 @@ function Contests() {
                                                 <br />
                                             </>
                                         )
-                                    })) : tab == "history" ?
+                                    }) : <PracticeCard />) : tab == "history" ?
                                     (
                                         history.length ?
                                             history.map((d, i) => {
