@@ -13,6 +13,7 @@ import HistoryCard from '../../../src/components/contests/HistoryCard';
 import PracticeCard from '../../../src/components/contests/PracticeCard';
 import GrandContestCard from '../../../src/components/contests/GrandContestCard';
 import useDetectKeyboardOpen from 'use-detect-keyboard-open';
+import MegaHistoryCard from '../../../src/components/contests/MegaHistoryCard';
 
 
 
@@ -123,7 +124,7 @@ function Contests() {
         setTab(t);
 
         let tkn = router?.query?.token;
-        let game_id = "1";
+        let game_id = router?.query?.game_id;
 
 
         if (!tkn || !game_id) return;
@@ -482,7 +483,11 @@ function Contests() {
                                     (
                                         history.length ?
                                             history.map((d, i) => {
+                                                if (d?.mega) {
+                                                    return <MegaHistoryCard d={d} key={d?.id} i={i} />
+                                                }
                                                 return (
+
 
                                                     <HistoryCard d={d} key={d?.id} i={i} />
 

@@ -170,7 +170,16 @@ export default {
 				console.log("🚀 ~ file: API.js ~ line 51 ~ .then ~ d", d)
 
 				if (d.status) {
-					writeAtom(apiAtom.historyList, d?.data);
+					let meta = d?.meta || []
+					meta = meta?.map(m => {
+						return { ...m, "mega": true }
+					})
+					let history = [...d?.data, ...(meta || [])]
+						.sort((a, b) => {
+							console.log(a, b)
+							return new Date(b?.created_at || b?.member?.created_at) - new Date(a?.created_at || a?.member?.created_at)
+						})
+					writeAtom(apiAtom.historyList, history);
 					return cb(d);
 				} else {
 					return toast.error(d?.message)
