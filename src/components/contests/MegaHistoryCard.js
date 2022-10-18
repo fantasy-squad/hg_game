@@ -58,6 +58,8 @@ function MegaHistoryCard({ d, i }) {
     }
 
 
+
+
     return (
         <>
             <div className="history-content"  >
@@ -77,7 +79,7 @@ function MegaHistoryCard({ d, i }) {
                     </div>
                     <div className="won">
                         <div className="won-person">
-                            <h6>JOINED</h6>
+                            <h6>{d?.contest?.status}</h6>
                             {/* <img src={(d?.oponents?.length && d?.oponents[0]?.user?.photo) ? d?.oponents[0]?.user?.photo : "/img/tony.png"} alt="" /> */}
 
                             <h5>{d?.oponents?.length ? d?.oponents[0]?.user?.username : ""}</h5>
